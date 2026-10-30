@@ -19,7 +19,7 @@ flutter pub get
 flutter run -d chrome --web-port 51238
 ```
 
-Trên web, chọn **Khám phá bản trình diễn**. Dữ liệu mẫu được lưu trên trình duyệt và không ghi vào Firebase; giữ cùng địa chỉ/cổng để dùng lại dữ liệu đã lưu.
+Trên web có hai cách dùng: **Đăng nhập Firebase** (dữ liệu thật trên project `qlsv-n05-phat-khoi`, cần tài khoản quản lý) hoặc **Khám phá bản trình diễn** (dữ liệu mẫu lưu trên trình duyệt, không ghi Firebase; giữ cùng địa chỉ/cổng để dùng lại dữ liệu đã lưu). Muốn chạy web với Firebase, cần đăng ký ứng dụng web: `flutterfire configure --project=qlsv-n05-phat-khoi --platforms=android,web`.
 
 Android đã có cấu hình Firebase. Chọn thiết bị bằng `flutter devices`, sau đó `flutter run -d <device-id>` để sử dụng đăng nhập Firebase hoặc chế độ trình diễn. Giao diện cloud phải được nghiệm thu trên Android trước khi đánh dấu toàn bộ user stories hoàn thành.
 

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -233,7 +232,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                             style: TextStyle(color: muted),
                           ),
                           const SizedBox(height: 30),
-                          if (!kIsWeb) ...[
+                          ...[
                             TextFormField(
                               controller: _email,
                               enabled: !_busy,
@@ -309,9 +308,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                           ),
                           const SizedBox(height: 14),
                           Text(
-                            kIsWeb
-                                ? 'Bản web dùng dữ liệu mẫu lưu trên trình duyệt.\nĐăng nhập Firebase được hỗ trợ trên bản Android.'
-                                : 'Bản trình diễn dùng dữ liệu mẫu riêng, không ghi Firebase.',
+                            'Bản trình diễn dùng dữ liệu mẫu riêng, không ghi Firebase.',
                             style: const TextStyle(
                               fontSize: 12,
                               color: muted,

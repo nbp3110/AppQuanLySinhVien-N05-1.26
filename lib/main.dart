@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'screens/project_login_screen.dart';
@@ -7,7 +6,7 @@ import 'widgets/firebase_app_loader.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(kIsWeb ? const MyApp() : const FirebaseAppLoader(child: MyApp()));
+  runApp(const FirebaseAppLoader(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
