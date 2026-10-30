@@ -99,6 +99,61 @@ void main() {
     expect(await data.subjects.getById('MISSING'), isNull);
   });
 
+  group('US07 - editing a student and changing class', () {
+    Future<void> withSecondClass() async {
+      await seed();
+      await data.classes.create(
+        ClassRoom(
+          id: 'KT01',
+          name: 'Kế toán 01',
+          major: 'Kế toán',
+          cohort: 'K17',
+        ),
+      );
+    }
+
+    Future<List<String>> idsIn(String classId) async => (await data
+            .watchStudentsInClass(classId)
+            .first)
+        .map((s) => s.studentId)
+        .toList();
+
+    test('moving a student updates both class lists', () async {
+      await withSecondClass();
+      expect(await idsIn('CNTT01'), ['23016960']);
+      expect(await idsIn('KT01'), isEmpty);
+      await data.updateStudent(Student(classId: 'KT01'));
+      expect(await idsIn('CNTT01'), isEmpty);
+      expect(await idsIn('KT01'), ['23016960']);
+    });
+
+    test('removing the class leaves the student without a class', () async {
+      await withSecondClass();
+      await data.updateStudent(Student());
+      expect(await idsIn('CNTT01'), isEmpty);
+      expect(await idsIn('KT01'), isEmpty);
+      expect((await data.students.getById('23016960'))!.classId, isNull);
+    });
+
+    test('a failed class change keeps the previous class', () async {
+      await withSecondClass();
+      await expectLater(
+        data.updateStudent(Student(classId: 'NOCLASS')),
+        throwsStateError,
+      );
+      expect(await idsIn('CNTT01'), ['23016960']);
+    });
+
+    test('editing keeps one record and never changes the ID', () async {
+      await withSecondClass();
+      await data.updateStudent(Student(name: 'Tên đã sửa', classId: 'CNTT01'));
+      final all = await data.students.watchAll().first;
+      expect(all.length, 1);
+      expect(all.single.studentId, '23016960');
+      expect(all.single.name, 'Tên đã sửa');
+    });
+  });
+
   group('US08 - grade counter and safe deletion', () {
     Future<Map<String, dynamic>> rawStudent(String id) async =>
         (await firestore.collection('students').doc(id).get()).data()!;
