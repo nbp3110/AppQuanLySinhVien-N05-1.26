@@ -51,6 +51,7 @@ Xóa sinh viên có xác nhận và chặn nếu đã có điểm, cả ở demo
 - [Lịch sử kiểm chứng](docs/03-verification.md).
 - [Ma trận kiểm thử](docs/07-test-matrix.md).
 - [Class Diagram và sơ đồ thuật toán](docs/09-class-diagram-va-so-do.md).
+- [Tài liệu code module Tài khoản và Sinh viên](docs/10-module-sinh-vien-va-tai-khoan.md).
 - [Bằng chứng kiểm tra Firebase cloud nền](docs/05-g1-cloud-evidence.json).
 
 Các bài thực hành Generics/Pavlova và màn hình placeholder cũ đã được bỏ khỏi ứng dụng chính. Lịch sử thay đổi vẫn nằm trong Git.

@@ -46,3 +46,7 @@ Ca sai: mã trùng SV001; tuổi 0/121/21.5; email `khong-hop-le`; classId NOCLA
 - Báo cáo nghiệm thu trước đó ghi analyze PASS, 17 Flutter tests PASS và 6 Firestore emulator tests PASS. Lần chạy lại hiện không qua dependency resolution: máy có Dart 3.13.1 trong khi `pubspec.yaml` yêu cầu ^3.13.2; `flutter analyze` và `flutter test` đều dừng. Chạy lại với Flutter 3.47.2/Dart 3.13.2 theo CI trước khi ghi nhận xác minh mới.
 - Không truy cập được trạng thái review/checks GitHub PR từ repo cục bộ. Merge trên main xác nhận code tích hợp nhưng không chứng minh Hiệp đã review; nhóm trưởng cần đối chiếu PR và reviewer/checks thật.
 - Test hiện có kiểm tra nền model/repository/rules/bootstrap, không bao phủ UI và phần lớn luồng nghiệp vụ. Mỗi chủ story cần thêm ca đúng/sai và UI test khi làm module; loading/rỗng/lỗi không thể xem là đạt chỉ từ test mapping.
+
+## Cập nhật 30/10/2026 (US01–US08)
+
+Phần Bắc + Phát đã bổ sung test và ảnh minh chứng sau khi ma trận này được lập. Bảng đối chiếu story với từng file test thực tế nằm ở mục 7 của [tài liệu module Tài khoản và Sinh viên](10-module-sinh-vien-va-tai-khoan.md); các cột "còn thiếu" ở trên cho US01–US08 là trạng thái ngày 27/10.
