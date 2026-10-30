@@ -1,7 +1,6 @@
 import 'package:app_quan_ly_sinh_vien/models/app_user.dart';
 import 'package:app_quan_ly_sinh_vien/models/class_room.dart';
 import 'package:app_quan_ly_sinh_vien/models/grade.dart';
-import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/models/subject.dart';
 import 'package:app_quan_ly_sinh_vien/services/auth_service.dart';
 import 'package:app_quan_ly_sinh_vien/services/project_store.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/fake_firebase_auth.dart';
+import 'support/sample_data.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -22,14 +22,14 @@ void main() {
       final store = ProjectStore.demo();
       await store.initialize();
       await store.saveStudent(
-        Student(studentId: 'NEW01', name: 'Sinh viên mới', classId: 'CNTT01'),
+        sampleStudent(studentId: 'NEW01', name: 'Sinh viên mới', classId: 'CNTT01'),
       );
       await expectLater(
-        store.saveStudent(Student(studentId: 'NEW01')),
+        store.saveStudent(sampleStudent(studentId: 'NEW01')),
         throwsStateError,
       );
       await store.saveStudent(
-        Student(studentId: 'NEW01', name: 'Tên đã sửa', classId: 'CNTT02'),
+        sampleStudent(studentId: 'NEW01', name: 'Tên đã sửa', classId: 'CNTT02'),
         editing: true,
       );
       await store.updateName('Quản lý thử');
@@ -57,14 +57,14 @@ void main() {
       final store = ProjectStore.demo(persist: false);
       await store.initialize();
       await expectLater(
-        store.saveStudent(Student(studentId: 'NEW', classId: 'MISSING')),
+        store.saveStudent(sampleStudent(studentId: 'NEW', classId: 'MISSING')),
         throwsStateError,
       );
       await expectLater(store.deleteStudent('SV001'), throwsStateError);
       expect(store.students.any((v) => v.studentId == 'SV001'), true);
       expect(store.students.any((v) => v.studentId == 'NEW'), false);
       await expectLater(
-        store.saveStudent(Student(studentId: 'MISSING'), editing: true),
+        store.saveStudent(sampleStudent(studentId: 'MISSING'), editing: true),
         throwsStateError,
       );
       store.dispose();
@@ -160,10 +160,10 @@ void main() {
         Subject(id: 'MOB01', name: 'Di động', credits: 3),
       );
       await data.createStudent(
-        Student(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
+        sampleStudent(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
       );
       await data.createStudent(
-        Student(studentId: 'SV2', name: 'Sinh viên Hai'),
+        sampleStudent(studentId: 'SV2', name: 'Sinh viên Hai'),
       );
       await data.saveGrade(
         Grade(
@@ -186,14 +186,14 @@ void main() {
       expect(store.loading, false);
       expect(store.error, isNull);
       expect(store.students.map((v) => v.studentId), unorderedEquals(['SV1', 'SV2']));
-      await data.createStudent(Student(studentId: 'SV3'));
+      await data.createStudent(sampleStudent(studentId: 'SV3'));
       await pumpEventQueue();
       expect(store.students.length, 3);
     });
 
     test('editing a student keeps its grade counter', () async {
       await store.saveStudent(
-        Student(studentId: 'SV2', name: 'Tên đã sửa'),
+        sampleStudent(studentId: 'SV2', name: 'Tên đã sửa'),
         editing: true,
       );
       await pumpEventQueue();
@@ -231,7 +231,7 @@ void main() {
       expect(fakeAuth.signOutCalls, 1);
       expect(store.students, isEmpty);
       expect(store.grades, isEmpty);
-      await data.createStudent(Student(studentId: 'LATE'));
+      await data.createStudent(sampleStudent(studentId: 'LATE'));
       await pumpEventQueue();
       expect(store.students, isEmpty);
       expect(store.error, isNull);
@@ -245,7 +245,7 @@ void main() {
       await pumpEventQueue();
       await expectLater(other.signOut(), throwsStateError);
       expect(other.students.length, 2);
-      await data.createStudent(Student(studentId: 'SV3'));
+      await data.createStudent(sampleStudent(studentId: 'SV3'));
       await pumpEventQueue();
       expect(other.students.length, 3);
     });

@@ -9,11 +9,13 @@ class Student {
   final String? classId;
   final String email;
 
+  /// Every profile field must be given: no default personal data is baked into
+  /// the model. A student without a class has [classId] null; [email] may be empty.
   Student({
-    this.name = 'Nguyen Van Bac',
-    this.studentId = '23016960',
-    this.major = 'Cong nghe thong tin',
-    this.age = 21,
+    required this.studentId,
+    required this.name,
+    required this.major,
+    required this.age,
     this.classId,
     this.email = '',
   }) {

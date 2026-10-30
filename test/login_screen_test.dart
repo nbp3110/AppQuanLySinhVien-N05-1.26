@@ -1,6 +1,5 @@
 import 'package:app_quan_ly_sinh_vien/models/app_user.dart';
 import 'package:app_quan_ly_sinh_vien/models/class_room.dart';
-import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/screens/project_login_screen.dart';
 import 'package:app_quan_ly_sinh_vien/screens/project_workspace.dart';
 import 'package:app_quan_ly_sinh_vien/services/auth_service.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'support/fake_firebase_auth.dart';
+import 'support/sample_data.dart';
 
 void main() {
   setUp(() => SharedPreferences.setMockInitialValues({}));
@@ -128,7 +128,7 @@ void main() {
           ),
         );
         await data.createStudent(
-          Student(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
+          sampleStudent(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
         );
       });
       final auth = FakeFirebaseAuth();

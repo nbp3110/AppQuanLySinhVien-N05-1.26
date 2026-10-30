@@ -1,11 +1,12 @@
 import 'package:app_quan_ly_sinh_vien/models/grade.dart';
-import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/models/subject.dart';
 import 'package:app_quan_ly_sinh_vien/screens/grades_screen.dart';
 import 'package:app_quan_ly_sinh_vien/screens/subjects_screen.dart';
 import 'package:app_quan_ly_sinh_vien/ui/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'support/sample_data.dart';
 
 void main() {
   testWidgets(
@@ -75,8 +76,8 @@ void main() {
     'Grades select student, validate score, and update the matching tuple',
     (tester) async {
       final students = [
-        Student(studentId: 'SV01', name: 'An'),
-        Student(studentId: 'SV02', name: 'Bình'),
+        sampleStudent(studentId: 'SV01', name: 'An'),
+        sampleStudent(studentId: 'SV02', name: 'Bình'),
       ];
       final subjects = [
         Subject(id: 'MOB01', name: 'Lập trình di động', credits: 3),

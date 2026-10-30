@@ -1,10 +1,11 @@
-import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/screens/learning_sample_screen.dart';
 import 'package:app_quan_ly_sinh_vien/screens/project_workspace.dart';
 import 'package:app_quan_ly_sinh_vien/services/project_store.dart';
 import 'package:app_quan_ly_sinh_vien/ui/project_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'support/sample_data.dart';
 
 void main() {
   for (final size in [const Size(390, 844), const Size(1440, 960)]) {
@@ -195,7 +196,7 @@ void main() {
     ) async {
       final store = await openStudentsPage(tester);
       await store.saveStudent(
-        Student(studentId: 'LIVE01', name: 'Sinh viên mới thêm'),
+        sampleStudent(studentId: 'LIVE01', name: 'Sinh viên mới thêm'),
       );
       await tester.pumpAndSettle();
       expect(find.text('Hiển thị 9 hồ sơ'), findsOneWidget);

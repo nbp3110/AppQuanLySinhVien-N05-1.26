@@ -1,6 +1,5 @@
 import 'package:app_quan_ly_sinh_vien/models/class_room.dart';
 import 'package:app_quan_ly_sinh_vien/models/grade.dart';
-import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/models/subject.dart';
 import 'package:app_quan_ly_sinh_vien/services/auth_service.dart';
 import 'package:app_quan_ly_sinh_vien/services/project_store.dart';
@@ -9,6 +8,7 @@ import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'support/fake_firebase_auth.dart';
+import 'support/sample_data.dart';
 
 /// G4-01: one full session on the "cloud" code path (ProjectStore.cloud with a
 /// fake Firestore and a fake Auth). It does not replace testing on Android with
@@ -62,7 +62,7 @@ void main() {
     expect(store.subjects.map((v) => v.id), ['MOB01']);
 
     await store.saveStudent(
-      Student(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
+      sampleStudent(studentId: 'SV1', name: 'Sinh viên Một', classId: 'CNTT01'),
     );
     await pumpEventQueue();
     expect(store.students.map((v) => v.studentId), ['SV1']);
@@ -70,7 +70,7 @@ void main() {
 
     // A student without grades could still be deleted, so it is checked first
     // with a second student.
-    await store.saveStudent(Student(studentId: 'SV2', name: 'Sinh viên Hai'));
+    await store.saveStudent(sampleStudent(studentId: 'SV2', name: 'Sinh viên Hai'));
     await pumpEventQueue();
     await store.deleteStudent('SV2');
     await pumpEventQueue();
@@ -108,7 +108,7 @@ void main() {
     expect(store.grades, isEmpty);
 
     // Data written by someone else after sign out must not reach this store.
-    await data.createStudent(Student(studentId: 'LATE'));
+    await data.createStudent(sampleStudent(studentId: 'LATE'));
     await pumpEventQueue();
     expect(store.students, isEmpty);
     expect(store.error, isNull);
@@ -121,7 +121,7 @@ void main() {
     );
     await pumpEventQueue();
     await first.saveStudent(
-      Student(studentId: 'SV9', name: 'Sinh viên Chín', classId: 'KT01'),
+      sampleStudent(studentId: 'SV9', name: 'Sinh viên Chín', classId: 'KT01'),
     );
     await pumpEventQueue();
 

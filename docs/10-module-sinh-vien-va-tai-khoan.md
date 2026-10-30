@@ -30,6 +30,9 @@ và Nguyễn Bá Phát trong kế hoạch). Ngày cập nhật: 30/10/2026.
 - `gradeCount` chỉ tồn tại trong document Firestore, không nằm trong lớp `Student`. Đây là bộ đếm số bản ghi
   điểm của sinh viên, dùng để xóa an toàn (mục 4).
 - `Student.fromMap` / `toMap` giữ nguyên cấu trúc; `createStudent` thêm `gradeCount: 0` khi ghi.
+- `Student` không có giá trị mặc định: `studentId`, `name`, `major`, `age` là bắt buộc; chỉ `classId` (null) và
+  `email` (rỗng) có thể bỏ qua. Test dùng hàm `sampleStudent()` trong `test/support/sample_data.dart`
+  với dữ liệu giả (`SV001`, `Sinh viên Mẫu`).
 
 ## 3. Quy tắc dữ liệu (US06, US07)
 
@@ -93,11 +96,11 @@ Chụp từ bản web, dữ liệu mẫu lưu trên trình duyệt, không ghi F
 
 Ngày 30/10/2026, máy Windows, Flutter 3.47.8:
 - `flutter analyze`: không có vấn đề.
-- `flutter test`: 68 test qua (trước khi thêm các test của G4-01/G4-02 trong mục 7).
+- `flutter test`: 74 test qua, đã gồm các test của G4-01/G4-02 ở mục 7.
 - Firestore Emulator (project giả `demo-qlsv`, Java 21.0.13, Node 24.21.0): 11 test qua, 0 lỗi.
 
-Các test mới của G4-01/G4-02 (`test/cloud_flow_test.dart` và nhóm "US07" trong
-`test/student_data_service_test.dart`) viết sau mốc trên, cần chạy lại `flutter test` để ghi nhận.
+Sau mốc trên, model `Student` được bỏ giá trị mặc định và các test chuyển sang `sampleStudent()`;
+cần chạy lại `flutter analyze` và `flutter test` để ghi nhận kết quả sau thay đổi này.
 
 ## 9. Hạn chế đã biết
 

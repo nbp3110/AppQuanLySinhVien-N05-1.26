@@ -5,14 +5,16 @@ import 'package:app_quan_ly_sinh_vien/models/student.dart';
 import 'package:app_quan_ly_sinh_vien/models/subject.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/sample_data.dart';
+
 void main() {
   test('All five models round-trip with document IDs separate from data', () {
     final user = AppUser(
       uid: 'uid-1',
       email: 'manager@example.com',
-      displayName: 'Bắc',
+      displayName: 'Quản lý Mẫu',
     );
-    expect(AppUser.fromMap(user.uid, user.toMap()).displayName, 'Bắc');
+    expect(AppUser.fromMap(user.uid, user.toMap()).displayName, 'Quản lý Mẫu');
     final room = ClassRoom(
       id: 'CNTT01',
       name: 'CNTT 01',
@@ -20,7 +22,7 @@ void main() {
       cohort: 'K17',
     );
     expect(ClassRoom.fromMap(room.id, room.toMap()).cohort, 'K17');
-    final student = Student(classId: room.id, email: 'student@example.com');
+    final student = sampleStudent(classId: room.id, email: 'student@example.com');
     final restored = Student.fromMap(student.studentId, student.toMap());
     expect(restored.studentId, student.studentId);
     expect(restored.classId, room.id);
@@ -38,10 +40,10 @@ void main() {
   });
 
   test('Student rejects invalid values before creating a document', () {
-    expect(() => Student(age: -1), throwsFormatException);
-    expect(() => Student(studentId: 'invalid/id'), throwsFormatException);
-    expect(() => Student(name: '   '), throwsFormatException);
-    final original = Student(name: 'Sinh viên mẫu', classId: 'CNTT01');
+    expect(() => sampleStudent(age: -1), throwsFormatException);
+    expect(() => sampleStudent(studentId: 'invalid/id'), throwsFormatException);
+    expect(() => sampleStudent(name: '   '), throwsFormatException);
+    final original = sampleStudent(name: 'Sinh viên mẫu', classId: 'CNTT01');
     final restored = Student.fromMap(original.studentId, original.toMap());
     expect(restored.name, original.name);
     expect(restored.classId, original.classId);
@@ -65,29 +67,29 @@ void main() {
       () => AppUser(uid: 'u1', email: 'invalid', displayName: 'A'),
       throwsFormatException,
     );
-    expect(() => Student(classId: ''), throwsFormatException);
+    expect(() => sampleStudent(classId: ''), throwsFormatException);
   });
 
   group('US06/US07 - student field limits', () {
     test('age accepts 1 and 120 and rejects 0, 121 and negatives', () {
-      expect(Student(age: 1).age, 1);
-      expect(Student(age: 120).age, 120);
+      expect(sampleStudent(age: 1).age, 1);
+      expect(sampleStudent(age: 120).age, 120);
       for (final age in [0, 121, -1]) {
-        expect(() => Student(age: age), throwsFormatException);
+        expect(() => sampleStudent(age: age), throwsFormatException);
       }
     });
 
     test('name and major accept 150 characters and reject 151', () {
-      expect(Student(name: 'a' * 150).name.length, 150);
-      expect(Student(major: 'a' * 150).major.length, 150);
-      expect(() => Student(name: 'a' * 151), throwsFormatException);
-      expect(() => Student(major: 'a' * 151), throwsFormatException);
-      expect(() => Student(major: ''), throwsFormatException);
+      expect(sampleStudent(name: 'a' * 150).name.length, 150);
+      expect(sampleStudent(major: 'a' * 150).major.length, 150);
+      expect(() => sampleStudent(name: 'a' * 151), throwsFormatException);
+      expect(() => sampleStudent(major: 'a' * 151), throwsFormatException);
+      expect(() => sampleStudent(major: ''), throwsFormatException);
     });
 
     test('email may be empty, otherwise it must look like an address', () {
-      expect(Student(email: '').email, '');
-      expect(Student(email: 'sv001@example.com').email, 'sv001@example.com');
+      expect(sampleStudent(email: '').email, '');
+      expect(sampleStudent(email: 'sv001@example.com').email, 'sv001@example.com');
       for (final email in [
         'khong-hop-le',
         'a@b',
@@ -96,7 +98,7 @@ void main() {
         '${'a' * 250}@b.co',
       ]) {
         expect(
-          () => Student(email: email),
+          () => sampleStudent(email: email),
           throwsFormatException,
           reason: email,
         );
@@ -104,11 +106,11 @@ void main() {
     });
 
     test('student ID allows 1-80 safe characters only', () {
-      expect(Student(studentId: 'a' * 80).studentId.length, 80);
-      expect(Student(studentId: 'SV_1-x').studentId, 'SV_1-x');
+      expect(sampleStudent(studentId: 'a' * 80).studentId.length, 80);
+      expect(sampleStudent(studentId: 'SV_1-x').studentId, 'SV_1-x');
       for (final id in ['', 'a' * 81, 'SV 1', 'SV~1', 'SV/1', 'SV.1']) {
         expect(
-          () => Student(studentId: id),
+          () => sampleStudent(studentId: id),
           throwsFormatException,
           reason: id,
         );
@@ -116,7 +118,7 @@ void main() {
     });
 
     test('a stored document with a text age or a missing field is refused', () {
-      final map = Student(studentId: 'SV1').toMap();
+      final map = sampleStudent(studentId: 'SV1').toMap();
       expect(
         () => Student.fromMap('SV1', {...map, 'age': '21'}),
         throwsFormatException,
@@ -132,8 +134,8 @@ void main() {
     });
 
     test('editing builds a new object and never changes the ID', () {
-      final old = Student(studentId: 'SV1', name: 'Tên cũ', age: 20);
-      final edited = Student(studentId: old.studentId, name: 'Tên mới', age: 21);
+      final old = sampleStudent(studentId: 'SV1', name: 'Tên cũ', age: 20);
+      final edited = sampleStudent(studentId: old.studentId, name: 'Tên mới', age: 21);
       expect(old.name, 'Tên cũ');
       expect(edited.studentId, old.studentId);
       expect(edited.toMap().containsKey('studentId'), false);
