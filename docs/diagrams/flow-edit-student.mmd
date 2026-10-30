@@ -1,0 +1,15 @@
+flowchart TD
+  A([Bắt đầu: chọn Sửa thông tin]) --> B[Form nạp dữ liệu cũ<br/>ô mã bị khóa]
+  B --> C[Sửa tên, ngành, tuổi, email, lớp]
+  C --> D{Dữ liệu hợp lệ?<br/>quy tắc như khi thêm}
+  D -- Không --> D1[Báo lỗi, giữ form] --> C
+  D -- Có --> E[Transaction: đọc students/mã]
+  E --> F{Hồ sơ còn tồn tại?}
+  F -- Không --> F1[Báo: Sinh viên không còn tồn tại<br/>không tạo lại bản ghi đã xóa] --> Z([Kết thúc])
+  F -- Có --> G{Lớp mới tồn tại<br/>hoặc để trống?}
+  G -- Không --> G1[Báo: Lớp học không tồn tại] --> C
+  G -- Có --> H[Cập nhật các trường hồ sơ<br/>không gửi gradeCount]
+  H --> I{Ghi thành công?}
+  I -- Không --> I1[Báo lỗi, không báo thành công giả] --> C
+  I -- Có --> J[Danh sách cập nhật, mã không đổi]
+  J --> Z

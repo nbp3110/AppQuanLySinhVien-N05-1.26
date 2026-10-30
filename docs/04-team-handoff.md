@@ -67,7 +67,7 @@ Không gọi Admin SDK hoặc dùng service-account từ ứng dụng Flutter.
 
 - Có hộp xác nhận; hủy không thay đổi dữ liệu.
 - Có điểm thì chặn xóa; chưa có điểm mới xóa.
-- Rules hiện đóng quyền delete cho tới khi cơ chế ràng buộc được bổ sung và test.
+- Đã triển khai bằng bộ đếm `gradeCount` + transaction + rules (xem docs/02); rules chỉ cho delete khi bộ đếm bằng 0.
 - Không chỉ query grades trên client rồi xóa: có nguy cơ nhập điểm đồng thời.
 - Phát và Hiệp phối hợp bổ sung metadata đếm điểm, cập nhật nguyên tử cùng tạo
   điểm, và kiểm tra bằng rules/transaction; hoặc dùng một backend duy nhất có

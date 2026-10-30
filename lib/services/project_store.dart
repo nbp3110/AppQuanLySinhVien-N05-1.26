@@ -25,7 +25,7 @@ class ProjectStore extends ChangeNotifier {
   AppUser profile = AppUser(
     uid: 'demo-manager',
     email: 'demo@example.invalid',
-    displayName: 'Nguyễn Văn Bắc',
+    displayName: 'Quản lý Mẫu',
   );
   List<Student> students = [];
   List<ClassRoom> classes = [];
@@ -35,6 +35,7 @@ class ProjectStore extends ChangeNotifier {
   bool loading = true;
   String? error;
   bool _disposed = false;
+  bool _signingOut = false;
   final List<String> activities = [];
 
   Future<void> initialize() async {
@@ -234,24 +235,31 @@ class ProjectStore extends ChangeNotifier {
       }
     } else {
       if (editing) {
-        await data!.students.update(student);
+        await data!.updateStudent(student);
       } else {
         await data!.createStudent(student);
       }
     }
   }, '${editing ? 'Cập nhật' : 'Thêm'} sinh viên ${student.studentId}');
 
+  /// Number of grade records the student already has, as currently known.
+  int gradeCountFor(String studentId) =>
+      grades.where((v) => v.studentId == studentId).length;
+
   Future<void> deleteStudent(String id) => _change(() async {
-    if (!isDemo) {
-      throw StateError('Xóa trên Firebase đang khóa để bảo vệ ràng buộc điểm.');
-    }
-    if (grades.any((v) => v.studentId == id)) {
+    // The list is only a friendly early check. On Firebase the transaction and
+    // the rules decide, using the counter kept in the student document.
+    if (gradeCountFor(id) > 0) {
       throw StateError('Sinh viên đã có điểm. Không thể xóa hồ sơ.');
     }
     if (!students.any((v) => v.studentId == id)) {
       throw StateError('Sinh viên không còn tồn tại.');
     }
-    students.removeWhere((v) => v.studentId == id);
+    if (isDemo) {
+      students.removeWhere((v) => v.studentId == id);
+    } else {
+      await data!.deleteStudent(id);
+    }
   }, 'Xóa sinh viên $id');
 
   Future<void> saveClass(ClassRoom room, {bool editing = false}) =>
@@ -330,7 +338,31 @@ class ProjectStore extends ChangeNotifier {
     return points / credits;
   }
 
+  /// Ends the signed-in session. Streams may report permission errors while the
+  /// account is being signed out; those are ignored. Afterwards the streams are
+  /// cancelled and the cached data is dropped. The demo has no session.
+  Future<void> signOut() async {
+    if (isDemo) return;
+    _signingOut = true;
+    try {
+      await auth!.signOut();
+    } catch (_) {
+      _signingOut = false;
+      rethrow;
+    }
+    final active = List.of(_subscriptions);
+    _subscriptions.clear();
+    for (final subscription in active) {
+      await subscription.cancel();
+    }
+    students = [];
+    classes = [];
+    subjects = [];
+    grades = [];
+  }
+
   void _loadError(Object e) {
+    if (_signingOut) return;
     loading = false;
     error =
         'Không tải được dữ liệu Firebase. Kiểm tra mạng và quyền tài khoản.';

@@ -61,8 +61,12 @@ API cho thành viên tích hợp, không được chạy seed tự động lúc 
 - `createStudent` kiểm tra lớp; `saveGrade` kiểm tra sinh viên và môn trong transaction.
 - Rules kiểm tra lại dữ liệu và references ngay cả khi client bỏ qua service.
 - Không dùng `users.watchAll/create`: rules chỉ cho đọc hồ sơ chính mình và sửa displayName.
-- Chưa mở delete ở nền. US08 cần cơ chế kiểm tra điểm đồng thời đáng tin cậy,
-  có thể dùng bộ đếm/transaction hoặc backend, rồi bổ sung rules và test.
+- Xóa sinh viên (US08): document `students/{id}` có thêm trường `gradeCount` (không nằm trong
+  model `Student`). `createStudent` ghi 0; `saveGrade` tăng đúng 1 trong cùng transaction khi
+  tạo điểm mới; `updateStudent` không gửi trường này. Rules chỉ cho tạo với `gradeCount == 0`,
+  chỉ cho tăng đúng 1 cùng lúc tạo điểm, chặn giảm, và chỉ cho `delete` khi `gradeCount == 0`.
+  Hồ sơ cũ chưa có `gradeCount` (tạo trước thay đổi này) cần được bổ sung trường này
+  bằng Console/Admin SDK trước khi sửa, nhập điểm hoặc xóa.
 - Chưa có phân trang; phù hợp quy mô bài tập. Nếu dữ liệu tăng, thêm phân trang
   thay vì tải tất cả. Hủy stream subscriptions khi rời màn hình/đăng xuất.
 

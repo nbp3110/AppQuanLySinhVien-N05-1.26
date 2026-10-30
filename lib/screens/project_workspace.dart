@@ -143,9 +143,21 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
     },
   );
 
+  /// First letter of the given name (last word), safe for empty or padded text.
+  static String _initial(String name) {
+    final words = name.trim().split(RegExp(r'\s+'));
+    final last = words.isEmpty ? '' : words.last;
+    return last.isEmpty
+        ? '?'
+        : String.fromCharCode(last.runes.first).toUpperCase();
+  }
+
   Future<void> _delete(Student student) async {
-    if (!s.isDemo) {
-      _notice('Xóa trên Firebase đang khóa để bảo vệ ràng buộc với bảng điểm.');
+    final graded = s.gradeCountFor(student.studentId);
+    if (graded > 0) {
+      _notice(
+        'Không thể xóa ${student.name}: sinh viên đã có $graded bản ghi điểm.',
+      );
       return;
     }
     final yes = await showDialog<bool>(
@@ -153,7 +165,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
       builder: (c) => AlertDialog(
         title: const Text('Xóa sinh viên?'),
         content: Text(
-          'Xóa ${student.name} (${student.studentId})? Sinh viên đã có điểm sẽ không được xóa.',
+          'Xóa ${student.name} (${student.studentId})? Hồ sơ đã xóa không thể khôi phục.',
         ),
         actions: [
           TextButton(
@@ -414,9 +426,12 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
         const SizedBox(height: 20),
         ListTile(
           contentPadding: EdgeInsets.zero,
-          leading: const CircleAvatar(
-            backgroundColor: Color(0xFFE9F4ED),
-            child: Text('B', style: TextStyle(color: green)),
+          leading: CircleAvatar(
+            backgroundColor: const Color(0xFFE9F4ED),
+            child: Text(
+              _initial(s.profile.displayName),
+              style: const TextStyle(color: green),
+            ),
           ),
           title: Text(
             s.profile.displayName,
@@ -963,7 +978,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
           radius: 21,
           backgroundColor: const Color(0xFFE6F4ED),
           child: Text(
-            v.name.split(' ').last.substring(0, 1),
+            _initial(v.name),
             style: const TextStyle(color: green, fontWeight: FontWeight.w800),
           ),
         ),
@@ -1014,10 +1029,9 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
             itemBuilder: (_) => [
               const PopupMenuItem(value: 'view', child: Text('Xem hồ sơ')),
               const PopupMenuItem(value: 'edit', child: Text('Sửa thông tin')),
-              PopupMenuItem(
+              const PopupMenuItem(
                 value: 'delete',
-                enabled: s.isDemo,
-                child: const Text('Xóa sinh viên'),
+                child: Text('Xóa sinh viên'),
               ),
             ],
           ),
@@ -1306,14 +1320,19 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 12),
-            ListTile(
-              onTap: () => _open(const LearningSampleScreen()),
-              leading: const Icon(
-                Icons.dashboard_customize_outlined,
-                color: green,
+            // The Panel behind has a background color; ListTile needs its own
+            // Material to paint ink, otherwise debug builds show an assertion.
+            Material(
+              color: Colors.transparent,
+              child: ListTile(
+                onTap: () => _open(const LearningSampleScreen()),
+                leading: const Icon(
+                  Icons.dashboard_customize_outlined,
+                  color: green,
+                ),
+                title: const Text('Mẫu giao diện học tập · Câu 5'),
+                trailing: const Icon(Icons.chevron_right),
               ),
-              title: const Text('Mẫu giao diện học tập · Câu 5'),
-              trailing: const Icon(Icons.chevron_right),
             ),
           ],
         ),
@@ -1323,7 +1342,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
 
   Future<void> _logout() async {
     try {
-      await s.auth?.signOut();
+      await s.signOut();
       if (mounted) Navigator.of(context).pop();
     } catch (_) {
       _notice('Chưa đăng xuất được. Kiểm tra mạng rồi thử lại.');

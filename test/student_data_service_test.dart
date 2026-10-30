@@ -98,4 +98,111 @@ void main() {
     );
     expect(await data.subjects.getById('MISSING'), isNull);
   });
+
+  group('US08 - grade counter and safe deletion', () {
+    Future<Map<String, dynamic>> rawStudent(String id) async =>
+        (await firestore.collection('students').doc(id).get()).data()!;
+    Future<Object?> counter(String id) async =>
+        (await rawStudent(id))[StudentDataService.gradeCountField];
+    Grade grade(String semester, double score) => Grade(
+      studentId: '23016960',
+      subjectId: 'MOB01',
+      semester: semester,
+      score: score,
+    );
+
+    test('a new student starts with a zero counter', () async {
+      await seed();
+      expect(await counter('23016960'), 0);
+    });
+
+    test('saveGrade raises the counter once per new grade only', () async {
+      await seed();
+      await data.saveGrade(grade('2026-1', 8));
+      expect(await counter('23016960'), 1);
+      await data.saveGrade(grade('2026-1', 9));
+      expect(await counter('23016960'), 1);
+      await data.saveGrade(grade('2026-2', 7));
+      expect(await counter('23016960'), 2);
+      expect((await firestore.collection('grades').get()).docs.length, 2);
+    });
+
+    test('a refused grade does not change any counter', () async {
+      await seed();
+      await expectLater(
+        data.saveGrade(
+          Grade(
+            studentId: '23016960',
+            subjectId: 'MISSING',
+            semester: '2026-1',
+            score: 8,
+          ),
+        ),
+        throwsStateError,
+      );
+      expect(await counter('23016960'), 0);
+      expect((await firestore.collection('grades').get()).docs, isEmpty);
+    });
+
+    test('profile edits keep the counter and the other fields', () async {
+      await seed();
+      await data.saveGrade(grade('2026-1', 8));
+      await data.updateStudent(
+        Student(
+          studentId: '23016960',
+          name: 'Tên mới',
+          major: 'Kế toán',
+          age: 22,
+          email: 'moi@example.com',
+        ),
+      );
+      final saved = await rawStudent('23016960');
+      expect(saved['name'], 'Tên mới');
+      expect(saved['classId'], isNull);
+      expect(saved[StudentDataService.gradeCountField], 1);
+    });
+
+    test('updateStudent refuses a missing student or class', () async {
+      await seed();
+      await expectLater(
+        data.updateStudent(Student(studentId: 'NOBODY')),
+        throwsStateError,
+      );
+      expect(await data.students.getById('NOBODY'), isNull);
+      await expectLater(
+        data.updateStudent(Student(classId: 'MISSING')),
+        throwsStateError,
+      );
+      expect((await data.students.getById('23016960'))!.classId, 'CNTT01');
+    });
+
+    test('a student without grades can be deleted', () async {
+      await seed();
+      await data.deleteStudent('23016960');
+      expect(await data.students.getById('23016960'), isNull);
+    });
+
+    test('a student with grades is kept', () async {
+      await seed();
+      await data.saveGrade(grade('2026-1', 8));
+      await expectLater(data.deleteStudent('23016960'), throwsStateError);
+      expect(await data.students.getById('23016960'), isNotNull);
+      expect((await firestore.collection('grades').get()).docs.length, 1);
+    });
+
+    test('unknown ids and documents without a counter are not deleted', () async {
+      await seed();
+      await expectLater(data.deleteStudent('NOBODY'), throwsStateError);
+      await firestore.collection('students').doc('OLD').set({
+        'name': 'Hồ sơ cũ',
+        'major': 'CNTT',
+        'age': 20,
+        'classId': null,
+        'email': '',
+      });
+      await expectLater(data.deleteStudent('OLD'), throwsStateError);
+      expect((await firestore.collection('students').doc('OLD').get()).exists,
+          true);
+    });
+  });
 }

@@ -1,0 +1,104 @@
+classDiagram
+  direction TB
+  class ModelValidation {
+    <<utility>>
+    +id(value, field) String
+    +text(value, field, max) String
+    +email(value, optional) String
+    +string(data, field) String
+    +integer(data, field) int
+  }
+  class AppUser {
+    +String uid
+    +String email
+    +String displayName
+    +String role
+    +fromMap(id, data) AppUser
+    +toMap() Map
+  }
+  class Student {
+    +String studentId
+    +String name
+    +String major
+    +int age
+    +String? classId
+    +String email
+    +validate() void
+    +fromMap(id, data) Student
+    +toMap() Map
+  }
+  class ClassRoom {
+    +String id
+    +String name
+    +String major
+    +String cohort
+    +fromMap(id, data) ClassRoom
+    +toMap() Map
+  }
+  class Subject {
+    +String id
+    +String name
+    +int credits
+    +fromMap(id, data) Subject
+    +toMap() Map
+  }
+  class Grade {
+    +String studentId
+    +String subjectId
+    +String semester
+    +double score
+    +id String
+    +fromMap(id, data) Grade
+    +toMap() Map
+  }
+  class FirestoreRepository~T~ {
+    +getById(id) Future~T?~
+    +watchAll() Stream~List~T~~
+    +create(value) Future
+    +update(value) Future
+  }
+  class StudentDataService {
+    +users FirestoreRepository~AppUser~
+    +students FirestoreRepository~Student~
+    +classes FirestoreRepository~ClassRoom~
+    +subjects FirestoreRepository~Subject~
+    +grades FirestoreRepository~Grade~
+    +createStudent(student) Future
+    +updateStudent(student) Future
+    +deleteStudent(studentId) Future
+    +saveGrade(grade) Future
+    +watchStudentsInClass(classId) Stream
+    +watchGradesForStudent(studentId) Stream
+  }
+  class AuthService {
+    +signIn(email, password) Future~AppUser~
+    +signOut() Future
+    +updateDisplayName(user, name) Future
+  }
+  class ProjectStore {
+    +AppUser profile
+    +List~Student~ students
+    +List~ClassRoom~ classes
+    +List~Subject~ subjects
+    +List~Grade~ grades
+    +saveStudent(student, editing) Future
+    +deleteStudent(id) Future
+    +saveGrade(grade) Future
+    +updateName(value) Future
+    +signOut() Future
+  }
+  ClassRoom "0..1" <-- "0..*" Student : classId
+  Student "1" <-- "0..*" Grade : studentId
+  Subject "1" <-- "0..*" Grade : subjectId
+  AuthService "1" --> "1" AppUser : users/uid
+  StudentDataService *-- FirestoreRepository : 5 kho
+  StudentDataService ..> Student
+  StudentDataService ..> Grade
+  AuthService --> StudentDataService
+  ProjectStore --> StudentDataService
+  ProjectStore --> AuthService
+  Student ..> ModelValidation
+  AppUser ..> ModelValidation
+  ClassRoom ..> ModelValidation
+  Subject ..> ModelValidation
+  Grade ..> ModelValidation

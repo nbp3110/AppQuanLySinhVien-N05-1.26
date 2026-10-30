@@ -1,0 +1,19 @@
+flowchart TD
+  A([Bắt đầu: bấm Thêm sinh viên]) --> B[Nhập mã, tên, ngành, tuổi,<br/>email, lớp]
+  B --> C{Ô bắt buộc<br/>đã nhập đủ?}
+  C -- Không --> C1[Báo Vui lòng nhập ...] --> B
+  C -- Có --> D{Tuổi là số nguyên?}
+  D -- Không --> D1[Báo: tuổi phải là số nguyên 1-120] --> B
+  D -- Có --> E[Tạo Student: kiểm tra mã 1-80 ký tự an toàn,<br/>tên và ngành 1-150, tuổi 1-120, email rỗng hoặc hợp lệ]
+  E --> F{Dữ liệu hợp lệ?}
+  F -- Không --> F1[Hiện thông báo FormatException] --> B
+  F -- Có --> G[Transaction Firestore]
+  G --> H{Mã đã tồn tại?}
+  H -- Có --> H1[Báo: Mã sinh viên đã tồn tại<br/>không ghi đè] --> B
+  H -- Không --> I{Có chọn lớp<br/>và lớp tồn tại?}
+  I -- Lớp không tồn tại --> I1[Báo: Lớp học không tồn tại] --> B
+  I -- Chưa xếp lớp hoặc lớp hợp lệ --> J[Ghi students/mã với gradeCount = 0]
+  J --> K{Ghi thành công?}
+  K -- Không --> K1[Báo lỗi lưu, giữ nguyên form] --> B
+  K -- Có --> L[Đóng form, báo đã lưu,<br/>danh sách tự cập nhật]
+  L --> M([Kết thúc])

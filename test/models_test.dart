@@ -68,6 +68,78 @@ void main() {
     expect(() => Student(classId: ''), throwsFormatException);
   });
 
+  group('US06/US07 - student field limits', () {
+    test('age accepts 1 and 120 and rejects 0, 121 and negatives', () {
+      expect(Student(age: 1).age, 1);
+      expect(Student(age: 120).age, 120);
+      for (final age in [0, 121, -1]) {
+        expect(() => Student(age: age), throwsFormatException);
+      }
+    });
+
+    test('name and major accept 150 characters and reject 151', () {
+      expect(Student(name: 'a' * 150).name.length, 150);
+      expect(Student(major: 'a' * 150).major.length, 150);
+      expect(() => Student(name: 'a' * 151), throwsFormatException);
+      expect(() => Student(major: 'a' * 151), throwsFormatException);
+      expect(() => Student(major: ''), throwsFormatException);
+    });
+
+    test('email may be empty, otherwise it must look like an address', () {
+      expect(Student(email: '').email, '');
+      expect(Student(email: 'sv001@example.com').email, 'sv001@example.com');
+      for (final email in [
+        'khong-hop-le',
+        'a@b',
+        'a b@c.com',
+        '@c.com',
+        '${'a' * 250}@b.co',
+      ]) {
+        expect(
+          () => Student(email: email),
+          throwsFormatException,
+          reason: email,
+        );
+      }
+    });
+
+    test('student ID allows 1-80 safe characters only', () {
+      expect(Student(studentId: 'a' * 80).studentId.length, 80);
+      expect(Student(studentId: 'SV_1-x').studentId, 'SV_1-x');
+      for (final id in ['', 'a' * 81, 'SV 1', 'SV~1', 'SV/1', 'SV.1']) {
+        expect(
+          () => Student(studentId: id),
+          throwsFormatException,
+          reason: id,
+        );
+      }
+    });
+
+    test('a stored document with a text age or a missing field is refused', () {
+      final map = Student(studentId: 'SV1').toMap();
+      expect(
+        () => Student.fromMap('SV1', {...map, 'age': '21'}),
+        throwsFormatException,
+      );
+      expect(
+        () => Student.fromMap('SV1', {...map, 'age': 21.5}),
+        throwsFormatException,
+      );
+      expect(
+        () => Student.fromMap('SV1', {...map}..remove('email')),
+        throwsFormatException,
+      );
+    });
+
+    test('editing builds a new object and never changes the ID', () {
+      final old = Student(studentId: 'SV1', name: 'Tên cũ', age: 20);
+      final edited = Student(studentId: old.studentId, name: 'Tên mới', age: 21);
+      expect(old.name, 'Tên cũ');
+      expect(edited.studentId, old.studentId);
+      expect(edited.toMap().containsKey('studentId'), false);
+    });
+  });
+
   for (final score in [-0.1, 10.1, double.nan, double.infinity]) {
     test('Grade rejects score $score', () {
       expect(

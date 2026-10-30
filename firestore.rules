@@ -41,20 +41,29 @@ service cloud.firestore {
       allow create, update: if manager() && validClass(id, request.resource.data);
       allow delete: if false;
     }
+    // gradeCount counts the grades of the student (US08). It only goes up, by
+    // one, in the same commit that creates a grade, so a student whose counter
+    // is 0 can never have grades and may safely be deleted.
     function validStudent(id, data) {
-      return code(id) && data.keys().hasAll(['name', 'major', 'age', 'classId', 'email'])
-        && data.keys().hasOnly(['name', 'major', 'age', 'classId', 'email'])
+      return code(id)
+        && data.keys().hasAll(['name', 'major', 'age', 'classId', 'email', 'gradeCount'])
+        && data.keys().hasOnly(['name', 'major', 'age', 'classId', 'email', 'gradeCount'])
         && text(data.name, 150) && text(data.major, 150)
         && data.age is int && data.age >= 1 && data.age <= 120
         && (data.email == '' || email(data.email))
+        && data.gradeCount is int && data.gradeCount >= 0
         && (data.classId == null || (code(data.classId)
           && exists(/databases/$(database)/documents/classes/$(data.classId))));
     }
     match /students/{id} {
       allow read: if manager();
-      allow create, update: if manager() && validStudent(id, request.resource.data);
-      // US08 will add a deletion workflow that deals with related grades.
-      allow delete: if false;
+      allow create: if manager() && validStudent(id, request.resource.data)
+        && request.resource.data.gradeCount == 0;
+      allow update: if manager() && validStudent(id, request.resource.data)
+        && (request.resource.data.gradeCount == resource.data.gradeCount
+          || (request.resource.data.gradeCount == resource.data.gradeCount + 1
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['gradeCount'])));
+      allow delete: if manager() && resource.data.gradeCount == 0;
     }
     function validSubject(id, data) {
       return code(id) && data.keys().hasAll(['name', 'credits'])
@@ -77,7 +86,11 @@ service cloud.firestore {
     }
     match /grades/{id} {
       allow read: if manager();
-      allow create, update: if manager() && validGrade(id, request.resource.data);
+      // A new grade must raise the student's counter by one in the same commit.
+      allow create: if manager() && validGrade(id, request.resource.data)
+        && getAfter(/databases/$(database)/documents/students/$(request.resource.data.studentId)).data.gradeCount
+          == get(/databases/$(database)/documents/students/$(request.resource.data.studentId)).data.gradeCount + 1;
+      allow update: if manager() && validGrade(id, request.resource.data);
       allow delete: if false;
     }
     match /{document=**} {

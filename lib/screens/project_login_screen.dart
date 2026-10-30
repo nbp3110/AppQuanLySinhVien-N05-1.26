@@ -10,8 +10,24 @@ import '../ui/project_theme.dart';
 import 'learning_sample_screen.dart';
 import 'project_workspace.dart';
 
+/// Signs in with email and password and returns the store of that session.
+/// Tests inject their own; the app uses [openFirebaseSession].
+typedef CloudSessionOpener =
+    Future<ProjectStore> Function(String email, String password);
+
+Future<ProjectStore> openFirebaseSession(String email, String password) async {
+  final data = StudentDataService(FirebaseFirestore.instance);
+  final auth = AuthService(auth: FirebaseAuth.instance, data: data);
+  return ProjectStore.cloud(
+    data,
+    auth,
+    await auth.signIn(email: email, password: password),
+  );
+}
+
 class ProjectLoginScreen extends StatefulWidget {
-  const ProjectLoginScreen({super.key});
+  const ProjectLoginScreen({super.key, this.openCloudSession});
+  final CloudSessionOpener? openCloudSession;
   @override
   State<ProjectLoginScreen> createState() => _ProjectLoginScreenState();
 }
@@ -32,12 +48,9 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
       if (demo) {
         store = ProjectStore.demo();
       } else {
-        final data = StudentDataService(FirebaseFirestore.instance);
-        final auth = AuthService(auth: FirebaseAuth.instance, data: data);
-        store = ProjectStore.cloud(
-          data,
-          auth,
-          await auth.signIn(email: _email.text, password: _password.text),
+        store = await (widget.openCloudSession ?? openFirebaseSession)(
+          _email.text,
+          _password.text,
         );
       }
       await store.initialize();

@@ -1,0 +1,16 @@
+flowchart TD
+  A([Bắt đầu: chọn Xóa sinh viên]) --> B{Danh sách đang biết<br/>sinh viên có điểm?}
+  B -- Có --> B1[Báo: không thể xóa,<br/>đã có N bản ghi điểm] --> Z([Kết thúc, giữ nguyên])
+  B -- Không --> C[Hộp xác nhận]
+  C --> D{Người dùng xác nhận?}
+  D -- Giữ lại --> Z
+  D -- Xác nhận xóa --> E[Transaction: đọc students/mã]
+  E --> F{Còn tồn tại và<br/>gradeCount là số nguyên?}
+  F -- Không --> F1[Báo lỗi, không xóa] --> Z
+  F -- Có --> G{gradeCount > 0?}
+  G -- Có --> G1[Báo: sinh viên đã có điểm] --> Z
+  G -- Không --> H[Xóa tài liệu]
+  H --> I{Rules chấp nhận?<br/>gradeCount vẫn bằng 0}
+  I -- Không, vừa có điểm mới --> I1[Từ chối, hồ sơ được giữ] --> Z
+  I -- Có --> J[Xóa xong, danh sách làm mới]
+  J --> Z

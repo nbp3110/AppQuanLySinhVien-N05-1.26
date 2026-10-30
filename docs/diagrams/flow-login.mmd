@@ -1,0 +1,14 @@
+flowchart TD
+  A([Bắt đầu: mở màn hình đăng nhập]) --> B[Nhập email và mật khẩu]
+  B --> C{Email có @ và<br/>mật khẩu không rỗng?}
+  C -- Không --> C1[Báo lỗi tại ô nhập<br/>không gọi Firebase] --> B
+  C -- Có --> D[Firebase Auth: signInWithEmailAndPassword]
+  D --> E{Đăng nhập thành công?}
+  E -- Không --> E1{Lỗi mạng?}
+  E1 -- Có --> E2[Báo: không kết nối được máy chủ] --> B
+  E1 -- Không --> E3[Báo: sai thông tin hoặc<br/>chưa được cấp quyền] --> B
+  E -- Có --> F[Đọc users/uid]
+  F --> G{Có hồ sơ và<br/>role = manager?}
+  G -- Không --> G1[signOut ngay<br/>báo chưa được cấp quyền] --> B
+  G -- Có --> H[Tạo ProjectStore, đăng ký stream dữ liệu]
+  H --> I([Mở màn hình quản lý])

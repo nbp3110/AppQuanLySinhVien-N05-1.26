@@ -42,7 +42,7 @@ Ca sai: mã trùng SV001; tuổi 0/121/21.5; email `khong-hop-le`; classId NOCLA
 ## Rà soát test nền và PR
 
 - Repo hiện ở `main` tại `86f0b3c`, bằng `origin/main`; working tree sạch. Nền G1 đã ghép qua merge commit `1178ede` (nhánh `g1-foundation`, commit `7d7fedf`); bằng chứng APK bổ sung ở `b098fd5`.
-- Code nền có validation model, repository typed, kiểm tra reference khi tạo Student/Grade, ID grade xác định, rules manager-only; rules tests chặn guest, tự nâng quyền và document sai. Delete vẫn khóa.
+- Code nền có validation model, repository typed, kiểm tra reference khi tạo Student/Grade, ID grade xác định, rules manager-only; rules tests chặn guest, tự nâng quyền và document sai. Xóa sinh viên được mở có kiểm soát bằng bộ đếm `gradeCount` (xem docs/02); rules emulator có test xóa khi chưa/đã có điểm và tạo điểm sai bộ đếm.
 - Báo cáo nghiệm thu trước đó ghi analyze PASS, 17 Flutter tests PASS và 6 Firestore emulator tests PASS. Lần chạy lại hiện không qua dependency resolution: máy có Dart 3.13.1 trong khi `pubspec.yaml` yêu cầu ^3.13.2; `flutter analyze` và `flutter test` đều dừng. Chạy lại với Flutter 3.47.2/Dart 3.13.2 theo CI trước khi ghi nhận xác minh mới.
 - Không truy cập được trạng thái review/checks GitHub PR từ repo cục bộ. Merge trên main xác nhận code tích hợp nhưng không chứng minh Hiệp đã review; nhóm trưởng cần đối chiếu PR và reviewer/checks thật.
 - Test hiện có kiểm tra nền model/repository/rules/bootstrap, không bao phủ UI và phần lớn luồng nghiệp vụ. Mỗi chủ story cần thêm ca đúng/sai và UI test khi làm module; loading/rỗng/lỗi không thể xem là đạt chỉ từ test mapping.

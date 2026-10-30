@@ -49,6 +49,14 @@ class StudentDataService {
 
   StudentDataService(this.firestore);
 
+  /// Counts the grades of a student. It lives only in the Firestore document
+  /// (not in [Student]) and is changed in the same transaction that creates a
+  /// grade, so the rules can refuse to delete a student that already has grades.
+  static const gradeCountField = 'gradeCount';
+
+  DocumentReference<Map<String, dynamic>> _studentDoc(String studentId) =>
+      firestore.collection('students').doc(studentId);
+
   Stream<List<Student>> watchStudentsInClass(String classId) => students
       .collection
       .where('classId', isEqualTo: classId)
@@ -63,7 +71,7 @@ class StudentDataService {
 
   Future<void> createStudent(Student student) async {
     student.validate();
-    final ref = students.collection.doc(student.studentId);
+    final ref = _studentDoc(student.studentId);
     await firestore.runTransaction((transaction) async {
       if ((await transaction.get(ref)).exists) {
         throw StateError('Mã sinh viên đã tồn tại.');
@@ -73,22 +81,73 @@ class StudentDataService {
               .exists) {
         throw StateError('Lớp học không tồn tại.');
       }
-      transaction.set(ref, student);
+      transaction.set(ref, {...student.toMap(), gradeCountField: 0});
+    });
+  }
+
+  /// Edits the profile fields only. The grade counter is never sent, so an
+  /// outdated copy of the student cannot overwrite it.
+  Future<void> updateStudent(Student student) async {
+    student.validate();
+    final ref = _studentDoc(student.studentId);
+    await firestore.runTransaction((transaction) async {
+      if (!(await transaction.get(ref)).exists) {
+        throw StateError('Sinh viên không còn tồn tại.');
+      }
+      if (student.classId != null &&
+          !(await transaction.get(classes.collection.doc(student.classId)))
+              .exists) {
+        throw StateError('Lớp học không tồn tại.');
+      }
+      transaction.update(ref, student.toMap());
+    });
+  }
+
+  /// Deletes a student only while the grade counter is zero. Reading and
+  /// deleting happen in one transaction, and the rules check the counter again,
+  /// so a grade created at the same moment cannot be orphaned.
+  Future<void> deleteStudent(String studentId) async {
+    final ref = _studentDoc(studentId);
+    await firestore.runTransaction((transaction) async {
+      final snapshot = await transaction.get(ref);
+      if (!snapshot.exists) {
+        throw StateError('Sinh viên không còn tồn tại.');
+      }
+      final count = snapshot.data()?[gradeCountField];
+      if (count is! int) {
+        throw StateError(
+          'Hồ sơ này chưa có bộ đếm điểm nên chưa thể xóa an toàn.',
+        );
+      }
+      if (count > 0) {
+        throw StateError('Sinh viên đã có điểm. Không thể xóa hồ sơ.');
+      }
+      transaction.delete(ref);
     });
   }
 
   Future<void> saveGrade(Grade grade) async {
+    final studentRef = _studentDoc(grade.studentId);
+    final gradeRef = grades.collection.doc(grade.id);
     await firestore.runTransaction((transaction) async {
-      final student = await transaction.get(
-        students.collection.doc(grade.studentId),
-      );
+      final student = await transaction.get(studentRef);
       final subject = await transaction.get(
         subjects.collection.doc(grade.subjectId),
+      );
+      final existing = await transaction.get(
+        firestore.collection('grades').doc(grade.id),
       );
       if (!student.exists || !subject.exists) {
         throw StateError('Sinh viên hoặc môn học không tồn tại.');
       }
-      transaction.set(grades.collection.doc(grade.id), grade);
+      if (!existing.exists) {
+        // A new grade raises the counter by exactly one in the same commit.
+        final count = student.data()?[gradeCountField];
+        transaction.update(studentRef, {
+          gradeCountField: (count is int ? count : 0) + 1,
+        });
+      }
+      transaction.set(gradeRef, grade);
     });
   }
 }

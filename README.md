@@ -42,7 +42,7 @@ flutter test
 flutter build web --release
 ```
 
-Xóa sinh viên trong demo có xác nhận và chặn nếu đã có điểm. Quyền xóa trên Firebase vẫn khóa, chờ xử lý ràng buộc đồng thời. Web chưa cấu hình đăng nhập Firebase; không dùng kết quả demo để thay cho nghiệm thu cloud.
+Xóa sinh viên có xác nhận và chặn nếu đã có điểm, cả ở demo lẫn Firebase. Trên Firebase, mỗi hồ sơ sinh viên có bộ đếm `gradeCount` tăng cùng giao dịch tạo điểm; rules chỉ cho xóa khi bộ đếm bằng 0 nên điểm không bị mồ côi khi nhập điểm và xóa xảy ra đồng thời. Web chưa cấu hình đăng nhập Firebase; không dùng kết quả demo để thay cho nghiệm thu cloud.
 
 ## Tài liệu
 
@@ -50,6 +50,7 @@ Xóa sinh viên trong demo có xác nhận và chặn nếu đã có điểm. Qu
 - [Model, Firestore và hướng dẫn thiết lập](docs/02-data-and-firebase.md).
 - [Lịch sử kiểm chứng](docs/03-verification.md).
 - [Ma trận kiểm thử](docs/07-test-matrix.md).
+- [Class Diagram và sơ đồ thuật toán](docs/09-class-diagram-va-so-do.md).
 - [Bằng chứng kiểm tra Firebase cloud nền](docs/05-g1-cloud-evidence.json).
 
 Các bài thực hành Generics/Pavlova và màn hình placeholder cũ đã được bỏ khỏi ứng dụng chính. Lịch sử thay đổi vẫn nằm trong Git.
