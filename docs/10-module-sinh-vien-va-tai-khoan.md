@@ -96,6 +96,7 @@ Sơ đồ nằm ở [09-class-diagram-va-so-do.md](09-class-diagram-va-so-do.md)
 | Console: `subjects` | ![subjects](screenshots/firebase-that/11-console-subjects.png) |
 | Console: `grades` | ![grades](screenshots/firebase-that/12-console-grades.png) |
 | Console: `students` có `gradeCount` | ![students](screenshots/firebase-that/13-console-students-gradecount.png) |
+| Console: `classes` | ![classes](screenshots/firebase-that/14-console-classes.png) |
 
 ## 7. Kiểm thử theo story
 

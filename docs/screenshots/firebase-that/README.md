@@ -23,6 +23,7 @@ trên project Firebase `qlsv-n05-phat-khoi` (thanh trên cùng của app ghi
 | `10-console-users.png` | Collection `users`: 2 document có ID là UID của tài khoản; hồ sơ có `displayName`, `email`, `role: "manager"` |
 | `11-console-subjects.png` | Collection `subjects`: MH1–MH4, document MH1 có `name` và `credits: 3` |
 | `12-console-grades.png` | Collection `grades`: ID dạng `SV01~MH1~2026-1`, có `score: 8`, `semester`, `studentId`, `subjectId` |
-| `13-console-students-gradecount.png` | Collection `students`: SV01 có `gradeCount: 1` (bộ đếm điểm dùng để chặn xóa, US08), cùng `age`, `classId`, `email`, `major`, `name`. Ảnh có cửa sổ Snipping Tool che một phần, nên chụp lại nếu dùng trong báo cáo |
+| `13-console-students-gradecount.png` | Collection `students`: SV01 có `gradeCount: 1` (bộ đếm điểm dùng để chặn xóa, US08), cùng `age`, `classId`, `email`, `major`, `name` |
+| `14-console-classes.png` | Collection `classes`: MS01–MS04, document MS01 có `cohort: "K18"`, `major`, `name` |
 
 Còn thiếu: ảnh tab Rules, ảnh Authentication → Users, ảnh sau khi lưu tên mới.
