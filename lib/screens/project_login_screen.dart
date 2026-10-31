@@ -70,7 +70,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
         setState(
           () => _error = e.code == 'network-request-failed'
               ? 'Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.'
-              : 'Sai thông tin đăng nhập, chưa được cấp quyền hoặc đã thử quá nhiều lần.',
+              : 'Sai thông tin đăng nhập, chưa được cấp quyền hoặc đã thử quá nhiều lần.\nChi tiết: ${e.code}',
         );
       }
       store?.dispose();

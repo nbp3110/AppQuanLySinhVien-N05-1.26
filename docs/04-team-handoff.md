@@ -36,14 +36,14 @@ test, chưa cần Firestore cloud; không đánh đồng kết quả đó với 
 ## Một Firebase project dùng chung
 
 - Firebase là dịch vụ cloud, không phải phần mềm cả nhóm phải tải về.
-- Chỉ dùng project `quan-ly-sinh-vien-ba83b`; không tạo bốn project khác nhau.
+- Chỉ dùng project `qlsv-n05-phat-khoi` của nhóm Phát + Khôi; không tạo thêm project khác.
 - File firebase_options.dart/google-services.json là cấu hình kết nối, không phải
   tài khoản có quyền quản trị. Quyền dữ liệu vẫn do Authentication và rules kiểm soát.
 - Nhóm trưởng cấu hình/deploy. Các bạn chạy `flutter pub get` để lấy thư viện SDK.
 - Firebase CLI chỉ cần khi deploy/chạy emulator; không bắt buộc cho mỗi lần code UI.
 - Tài khoản manager là tài khoản đăng nhập thử trong app, khác tài khoản quản trị
   Firebase Console. Không gửi mật khẩu/token vào PR, báo cáo hoặc commit.
-- Database Singapore, Email/Password và 4 tài khoản thử đã được cấu hình; xem bằng chứng cloud ở docs/05-g1-cloud-evidence.json.
+- Project `qlsv-n05-phat-khoi`: Database Singapore, Email/Password và 2 tài khoản quản lý (Phát, Khôi) với hồ sơ `users/{uid}`; ảnh nghiệm thu ở docs/screenshots/firebase-that/. File docs/05-g1-cloud-evidence.json là bằng chứng của project cũ `quan-ly-sinh-vien-ba83b` thuộc nhóm trước khi tách, chỉ để tham khảo.
 
 ## Contract cho các module
 
