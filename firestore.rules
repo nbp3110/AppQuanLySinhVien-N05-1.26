@@ -75,10 +75,13 @@ service cloud.firestore {
       allow create, update: if manager() && validSubject(id, request.resource.data);
       allow delete: if false;
     }
+    function semester(value) {
+      return value is string && value.matches('^[0-9]{4}-[12]$');
+    }
     function validGrade(id, data) {
       return data.keys().hasAll(['studentId', 'subjectId', 'semester', 'score'])
         && data.keys().hasOnly(['studentId', 'subjectId', 'semester', 'score'])
-        && code(data.studentId) && code(data.subjectId) && code(data.semester)
+        && code(data.studentId) && code(data.subjectId) && semester(data.semester)
         && id == data.studentId + '~' + data.subjectId + '~' + data.semester
         && data.score is number && data.score >= 0 && data.score <= 10
         && exists(/databases/$(database)/documents/students/$(data.studentId))

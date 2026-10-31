@@ -9,6 +9,15 @@ class ModelValidation {
     return value;
   }
 
+  /// Semester in the form YYYY-1 or YYYY-2 (the same rule as the grade form
+  /// and firestore.rules), for example 2026-1.
+  static String semester(String value) {
+    if (!RegExp(r'^\d{4}-[12]$').hasMatch(value)) {
+      throw const FormatException('Học kỳ có dạng YYYY-1 hoặc YYYY-2.');
+    }
+    return value;
+  }
+
   static String text(String value, String field, {int max = 150}) {
     if (value.trim().isEmpty || value.length > max) {
       throw FormatException('$field không được trống hoặc dài quá $max ký tự.');

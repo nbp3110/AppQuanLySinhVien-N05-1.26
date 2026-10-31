@@ -45,6 +45,15 @@ test('Manager can read and write valid data in all academic collections', async 
   batch.update(doc(db, 'students/SV1'), { gradeCount: increment(1) });
   await assertSucceeds(batch.commit());
 });
+test('Manager can save a grade for either semester of the year', async () => {
+  const db = manager();
+  for (const semester of ['2026-1', '2026-2']) {
+    const batch = writeBatch(db);
+    batch.set(doc(db, `grades/SV1~M1~${semester}`), {...grade, semester});
+    batch.update(doc(db, 'students/SV1'), { gradeCount: increment(1) });
+    await assertSucceeds(batch.commit());
+  }
+});
 test('Reject malformed documents, invalid scores and broken references', async () => {
   const db = manager();
   await assertFails(setDoc(doc(db, 'students/SV2'), {...student, classId: 'MISSING'}));
@@ -61,6 +70,9 @@ test('Reject malformed documents, invalid scores and broken references', async (
   await assertFails(withCounter('SV1~M1~2026-1', {...grade, score: 11}, 'SV1'));
   await assertFails(withCounter('SV2~M1~2026-1', {...grade, studentId: 'SV2'}, 'SV1'));
   await assertFails(withCounter('wrong-id', grade, 'SV1'));
+  for (const semester of ['2026-3', '2026-0', 'abc', '2026', '26-1']) {
+    await assertFails(withCounter(`SV1~M1~${semester}`, {...grade, semester}, 'SV1'));
+  }
   await assertFails(setDoc(doc(db, 'students/SV3'), {...student, gradeCount: 5}));
   await assertFails(setDoc(doc(db, 'students/SV4'), (({gradeCount, ...rest}) => rest)(student)));
 });

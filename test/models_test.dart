@@ -155,6 +155,41 @@ void main() {
       );
     });
   }
+  for (final semester in ['2026-3', '2026-0', '2026', '26-1', 'abc', '2026-1 ', '2026-12', '']) {
+    test('Grade rejects semester "$semester"', () {
+      expect(
+        () => Grade(
+          studentId: 'SV1',
+          subjectId: 'M1',
+          semester: semester,
+          score: 8,
+        ),
+        throwsFormatException,
+      );
+    });
+  }
+  for (final semester in ['2026-1', '2026-2', '2027-1']) {
+    test('Grade accepts semester $semester', () {
+      final grade = Grade(
+        studentId: 'SV1',
+        subjectId: 'M1',
+        semester: semester,
+        score: 8,
+      );
+      expect(Grade.fromMap(grade.id, grade.toMap()).semester, semester);
+    });
+  }
+  test('Grade.fromMap refuses stored data with an invalid semester', () {
+    expect(
+      () => Grade.fromMap('SV1~M1~2026-3', {
+        'studentId': 'SV1',
+        'subjectId': 'M1',
+        'semester': '2026-3',
+        'score': 8,
+      }),
+      throwsFormatException,
+    );
+  });
   test('Grade allows both boundaries and rejects mismatched document IDs', () {
     for (final score in [0.0, 10.0]) {
       final grade = Grade(

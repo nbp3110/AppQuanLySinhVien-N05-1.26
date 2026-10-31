@@ -14,7 +14,7 @@ class Grade {
   }) {
     ModelValidation.id(studentId, 'Mã sinh viên');
     ModelValidation.id(subjectId, 'Mã môn');
-    ModelValidation.id(semester, 'Học kỳ');
+    ModelValidation.semester(semester);
     if (!score.isFinite || score < 0 || score > 10) {
       throw const FormatException('Điểm phải từ 0 đến 10.');
     }
