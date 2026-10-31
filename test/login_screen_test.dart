@@ -94,6 +94,27 @@ void main() {
         find.textContaining('Không mở được phiên làm việc'),
         findsOneWidget,
       );
+      expect(
+        find.textContaining('Tài khoản chưa được cấp quyền quản lý.'),
+        findsOneWidget,
+      );
+      expect(find.byType(ProjectWorkspace), findsNothing);
+    });
+
+    testWidgets('a Firestore refusal after sign-in shows its error code', (
+      tester,
+    ) async {
+      await pumpLogin(tester, (email, password) async {
+        throw FirebaseException(
+          plugin: 'cloud_firestore',
+          code: 'permission-denied',
+        );
+      });
+      await submit(tester);
+      expect(
+        find.textContaining('cloud_firestore/permission-denied'),
+        findsOneWidget,
+      );
       expect(find.byType(ProjectWorkspace), findsNothing);
     });
 

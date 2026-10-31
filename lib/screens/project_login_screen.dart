@@ -74,10 +74,19 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
         );
       }
       store?.dispose();
-    } catch (_) {
+    } catch (e) {
+      // Only the reason is shown (a message we wrote or a Firebase error code);
+      // never the credentials.
+      final reason = e is StateError
+          ? e.message
+          : e is FirebaseException
+          ? '${e.plugin}/${e.code}'
+          : null;
       if (mounted) {
         setState(
-          () => _error = 'Không mở được phiên làm việc. Kiểm tra quyền tài khoản và kết nối.',
+          () => _error =
+              'Không mở được phiên làm việc. Kiểm tra quyền tài khoản và kết nối.'
+              '${reason == null ? '' : '\nChi tiết: $reason'}',
         );
       }
       store?.dispose();
