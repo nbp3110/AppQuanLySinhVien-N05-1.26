@@ -329,7 +329,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'EduSpace',
+                    'UniNest',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w800,

@@ -1,4 +1,4 @@
-# EduSpace — Quản lý sinh viên
+# UniNest — Quản lý sinh viên
 
 Ứng dụng Flutter/Dart cho người quản lý: hồ sơ sinh viên, lớp học, môn học và bảng điểm.
 

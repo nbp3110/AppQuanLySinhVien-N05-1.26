@@ -9,13 +9,13 @@ void main() {
   runApp(const FirebaseAppLoader(child: MyApp()));
 }
 
-/// Gốc ứng dụng EduSpace: chủ đề giao diện và màn hình đăng nhập.
+/// Gốc ứng dụng UniNest: chủ đề giao diện và màn hình đăng nhập.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: 'EduSpace · Quản lý sinh viên',
+    title: 'UniNest · Quản lý sinh viên',
     theme: projectTheme(),
     home: const ProjectLoginScreen(),
   );

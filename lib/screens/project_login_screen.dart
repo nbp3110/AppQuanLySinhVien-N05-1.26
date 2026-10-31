@@ -104,140 +104,83 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    body: LayoutBuilder(
-      builder: (context, box) {
-        final wide = box.maxWidth >= 900;
-        return Row(
-          children: [
-            if (wide)
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFF4B3BC4), Color(0xFF1F1A5C)],
-                    ),
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: -80,
-                        right: -60,
-                        child: Container(
-                          width: 260,
-                          height: 260,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withValues(alpha: .07),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: -90,
-                        left: -50,
-                        child: Container(
-                          width: 300,
-                          height: 300,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: const Color(0xFFFF8FB8).withValues(alpha: .16),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                    padding: const EdgeInsets.all(56),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Row(
-                          children: [
-                            Icon(
-                              Icons.school_rounded,
-                              color: Colors.white,
-                              size: 33,
-                            ),
-                            SizedBox(width: 12),
-                            Text(
-                              'EduSpace',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w800,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        const Pill(
-                          'KHÔNG GIAN QUẢN LÝ HỌC TẬP',
-                          color: Color(0xFFD9D3FF),
-                        ),
-                        const SizedBox(height: 25),
-                        const Text(
-                          'Kết nối dữ liệu.\nĐồng hành học tập.',
-                          style: TextStyle(
-                            fontSize: 46,
-                            height: 1.2,
-                            letterSpacing: -1.5,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        const Text(
-                          'Sinh viên, lớp học và kết quả học tập\ntrong một không gian thống nhất.',
-                          style: TextStyle(
-                            fontSize: 17,
-                            height: 1.7,
-                            color: Color(0xFFD0CCF5),
-                          ),
-                        ),
-                        const SizedBox(height: 35),
-                        Center(
-                          child: Container(
-                            width: 235,
-                            height: 170,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withValues(alpha: .08),
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: const Icon(
-                              Icons.auto_stories_rounded,
-                              size: 116,
-                              color: Color(0xFFFFD36B),
-                            ),
-                          ),
-                        ),
-                        const Spacer(),
-                        const Text(
-                          'DỰ ÁN QUẢN LÝ SINH VIÊN · FLUTTER',
-                          style: TextStyle(
-                            color: Color(0xFFBDB8E8),
-                            fontSize: 11,
-                            letterSpacing: 1.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                    ],
-                  ),
-                ),
+    body: Stack(
+      children: [
+        const Positioned.fill(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF4B3BC4), Color(0xFF7B4FE0), Color(0xFFFF8FB8)],
               ),
-            Expanded(
-              child: Center(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.all(wide ? 48 : 24),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 410),
-                    child: Form(
+            ),
+          ),
+        ),
+        Positioned(top: -90, left: -70,
+          child: Container(
+            width: 280,
+            height: 280,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0x26FFFFFF),
+            ),
+          ),
+        ),
+        Positioned(bottom: -120, right: -80,
+          child: Container(
+            width: 340,
+            height: 340,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0x33FFD36B),
+            ),
+          ),
+        ),
+        Positioned(top: 120, right: 90,
+          child: Container(
+            width: 90,
+            height: 90,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0x33FFFFFF),
+            ),
+          ),
+        ),
+        Positioned(bottom: 90, left: 110,
+          child: Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0x40FF8FB8),
+            ),
+          ),
+        ),
+        Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 440),
+              child: Container(
+                padding: const EdgeInsets.all(32),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(28),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF1F1A5C).withValues(alpha: .35),
+                      blurRadius: 50,
+                      offset: const Offset(0, 24),
+                    ),
+                  ],
+                ),
+                child: Form(
                       key: _form,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if (!wide)
-                            const Padding(
+                                                      const Padding(
                               padding: EdgeInsets.only(bottom: 35),
                               child: Row(
                                 children: [
@@ -248,7 +191,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'EduSpace',
+                                    'UniNest',
                                     style: TextStyle(
                                       fontSize: 26,
                                       fontWeight: FontWeight.w800,
@@ -373,13 +316,11 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                         ],
                       ),
                     ),
-                  ),
-                ),
               ),
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     ),
   );
 }
