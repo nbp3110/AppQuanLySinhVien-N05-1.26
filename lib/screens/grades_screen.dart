@@ -178,7 +178,7 @@ class _GradesScreenState extends State<GradesScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 13),
                     decoration: const BoxDecoration(
-                      border: Border(top: BorderSide(color: Color(0xFFEBF0F3))),
+                      border: Border(top: BorderSide(color: Color(0xFFE9E5FA))),
                     ),
                     child: Row(
                       children: [
@@ -209,7 +209,7 @@ class _GradesScreenState extends State<GradesScreen> {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE3F5EE),
+                            color: const Color(0xFFEDE9FF),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(

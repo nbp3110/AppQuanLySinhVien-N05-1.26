@@ -116,10 +116,36 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Color(0xFF0D775D), Color(0xFF123B42)],
+                      colors: [Color(0xFF4B3BC4), Color(0xFF1F1A5C)],
                     ),
                   ),
-                  child: Padding(
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: -80,
+                        right: -60,
+                        child: Container(
+                          width: 260,
+                          height: 260,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white.withValues(alpha: .07),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: -90,
+                        left: -50,
+                        child: Container(
+                          width: 300,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xFFFF8FB8).withValues(alpha: .16),
+                          ),
+                        ),
+                      ),
+                      Padding(
                     padding: const EdgeInsets.all(56),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +171,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                         const Spacer(),
                         const Pill(
                           'KHÔNG GIAN QUẢN LÝ HỌC TẬP',
-                          color: Color(0xFFA7F0CB),
+                          color: Color(0xFFD9D3FF),
                         ),
                         const SizedBox(height: 25),
                         const Text(
@@ -164,7 +190,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                           style: TextStyle(
                             fontSize: 17,
                             height: 1.7,
-                            color: Color(0xFFB8DED4),
+                            color: Color(0xFFD0CCF5),
                           ),
                         ),
                         const SizedBox(height: 35),
@@ -187,13 +213,15 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                         const Text(
                           'DỰ ÁN QUẢN LÝ SINH VIÊN · FLUTTER',
                           style: TextStyle(
-                            color: Color(0xFFA3CBC0),
+                            color: Color(0xFFBDB8E8),
                             fontSize: 11,
                             letterSpacing: 1.5,
                           ),
                         ),
                       ],
                     ),
+                  ),
+                    ],
                   ),
                 ),
               ),

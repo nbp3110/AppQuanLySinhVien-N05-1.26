@@ -110,7 +110,7 @@ class _SubjectsScreenState extends State<SubjectsScreen> {
                   ListTile(
                     contentPadding: EdgeInsets.zero,
                     leading: CircleAvatar(
-                      backgroundColor: const Color(0xFFE3F5EE),
+                      backgroundColor: const Color(0xFFEDE9FF),
                       child: Text(
                         '${rows[i].credits}',
                         style: const TextStyle(

@@ -216,7 +216,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                           ),
                           color: s.isDemo
                               ? const Color(0xFFFFF4D8)
-                              : const Color(0xFFE4F5EE),
+                              : const Color(0xFFEDE9FF),
                           child: Row(
                             children: [
                               Icon(
@@ -296,7 +296,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                     selectedIndex: _page,
                     onDestinationSelected: _go,
                     backgroundColor: Colors.white,
-                    indicatorColor: const Color(0xFFDFF4EB),
+                    indicatorColor: const Color(0xFFE4DEFF),
                     destinations: List.generate(
                       _labels.length,
                       (i) => NavigationDestination(
@@ -354,7 +354,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: Material(
-              color: _page == i ? const Color(0xFFE6F6EE) : Colors.transparent,
+              color: _page == i ? const Color(0xFFEDE9FF) : Colors.transparent,
               borderRadius: BorderRadius.circular(13),
               child: InkWell(
                 onTap: () => _go(i),
@@ -428,7 +428,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
         ListTile(
           contentPadding: EdgeInsets.zero,
           leading: CircleAvatar(
-            backgroundColor: const Color(0xFFE9F4ED),
+            backgroundColor: const Color(0xFFEDE9FF),
             child: Text(
               _initial(s.profile.displayName),
               style: const TextStyle(color: green),
@@ -606,7 +606,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(23),
             gradient: const LinearGradient(
-              colors: [Color(0xFFD7F4E8), Color(0xFFECF8D9)],
+              colors: [Color(0xFFE4DEFF), Color(0xFFFFE3EE)],
             ),
           ),
           child: Row(
@@ -615,14 +615,14 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Pill('HỌC TẬP CÙNG NHAU', color: Color(0xFF448663)),
+                    const Pill('HỌC TẬP CÙNG NHAU', color: Color(0xFF5A4BC2)),
                     const SizedBox(height: 15),
                     Text(
                       'Mỗi dữ liệu nhỏ,\nmột hành trình lớn.',
                       style: TextStyle(
                         fontSize: narrow ? 25 : 32,
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF205E4D),
+                        color: const Color(0xFF2E2478),
                         height: 1.2,
                         letterSpacing: -.8,
                       ),
@@ -630,7 +630,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                     const SizedBox(height: 12),
                     const Text(
                       'Sắp xếp thông tin hôm nay để quản lý tốt hơn ngày mai.',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF629383)),
+                      style: TextStyle(fontSize: 12, color: Color(0xFF7C70C8)),
                     ),
                     const SizedBox(height: 20),
                     FilledButton.icon(
@@ -653,7 +653,7 @@ class _ProjectWorkspaceState extends State<ProjectWorkspace> {
                         height: 170,
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFFC7EACB),
+                          color: Color(0xFFCFC7FF),
                         ),
                       ),
                       Transform.rotate(

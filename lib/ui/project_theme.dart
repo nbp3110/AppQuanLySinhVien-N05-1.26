@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-const ink = Color(0xFF172D3B);
+const ink = Color(0xFF1E1B3A);
 const muted = Color(0xFF75858E);
-const green = Color(0xFF149A72);
-const canvas = Color(0xFFF3F7FA);
+const green = Color(0xFF5B4FE0);
+const canvas = Color(0xFFF5F3FF);
 
 ThemeData projectTheme() => ThemeData(
   useMaterial3: true,
@@ -38,15 +38,15 @@ ThemeData projectTheme() => ThemeData(
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: const Color(0xFFF6F8FA),
+    fillColor: const Color(0xFFF7F5FF),
     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Color(0xFFE0E8EB)),
+      borderSide: const BorderSide(color: Color(0xFFDDD8F5)),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
-      borderSide: const BorderSide(color: Color(0xFFE0E8EB)),
+      borderSide: const BorderSide(color: Color(0xFFDDD8F5)),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(14),
@@ -70,7 +70,7 @@ ThemeData projectTheme() => ThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
     ),
   ),
-  dividerColor: const Color(0xFFEBF0F3),
+  dividerColor: const Color(0xFFE9E5FA),
 );
 
 /// Khung nội dung bo góc dùng chung cho các màn hình.
@@ -90,7 +90,7 @@ class Panel extends StatelessWidget {
     decoration: BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(22),
-      border: Border.all(color: const Color(0xFFE8EEF1)),
+      border: Border.all(color: const Color(0xFFE4E0F7)),
     ),
     child: child,
   );
