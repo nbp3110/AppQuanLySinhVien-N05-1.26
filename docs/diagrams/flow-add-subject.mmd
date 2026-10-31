@@ -1,0 +1,18 @@
+flowchart TD
+  A([Bắt đầu: bấm Thêm môn]) --> B[Nhập mã môn, tên môn, số tín chỉ]
+  B --> C{Mã đúng dạng<br/>chữ không dấu, số, _ hoặc -?}
+  C -- Không --> C1[Báo lỗi mã] --> B
+  C -- Có --> D{Mã đã có<br/>không phân biệt hoa thường?}
+  D -- Có --> D1[Báo: Mã môn học đã tồn tại] --> B
+  D -- Không --> E{Tên không trống?}
+  E -- Không --> E1[Báo: Vui lòng nhập tên môn học] --> B
+  E -- Có --> F{Tín chỉ là số nguyên<br/>từ 1 đến 10?}
+  F -- Không --> F1[Báo: Tín chỉ phải là số nguyên từ 1 đến 10] --> B
+  F -- Có --> G[Tạo Subject: tên tối đa 150 ký tự]
+  G --> H{Dữ liệu hợp lệ?}
+  H -- Không --> H1[Hiện thông báo trong form] --> B
+  H -- Có --> I[Transaction Firestore: tạo subjects/mã,<br/>không ghi đè]
+  I --> J{Ghi thành công?}
+  J -- Không --> J1[Báo: Không lưu được môn học] --> B
+  J -- Có --> K[Đóng form, danh sách môn tự cập nhật]
+  K --> L([Kết thúc])

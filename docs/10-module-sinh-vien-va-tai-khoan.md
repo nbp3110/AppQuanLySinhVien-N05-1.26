@@ -135,4 +135,4 @@ có điểm xóa được, đổi tên hiển thị (ảnh ở mục 6).
 - Hồ sơ sinh viên tạo trước thay đổi bộ đếm chưa có `gradeCount`, nên chưa sửa, xóa hoặc nhập điểm được cho đến khi bổ sung trường này.
 - Nghiệm thu với Firebase thật mới chạy trên bản web (Chrome); chưa chạy trên Android vì không có thiết bị.
 - Xóa lớp, môn và điểm vẫn bị rules khóa (ngoài phạm vi các story hiện tại).
-- Validator học kỳ (chỉ nhận dạng `2026-1`, `2026-2`) thuộc US15, chưa xử lý ở đây.
+- Kiểm tra học kỳ dạng `YYYY-1` hoặc `YYYY-2` thuộc US15 và được xử lý trong [11-module-lop-mon-hoc-diem.md](11-module-lop-mon-hoc-diem.md) (nhánh `feature-khoi`).

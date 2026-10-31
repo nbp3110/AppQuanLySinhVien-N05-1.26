@@ -1,0 +1,17 @@
+flowchart TD
+  A([Bắt đầu: bấm Thêm lớp học]) --> B[Nhập mã lớp, tên lớp,<br/>ngành học, khóa học]
+  B --> C{Ô bắt buộc<br/>đã nhập đủ?}
+  C -- Không --> C1[Báo Vui lòng nhập ...] --> B
+  C -- Có --> D[Tạo ClassRoom: mã 1-80 ký tự an toàn,<br/>tên và ngành 1-150, khóa 1-30]
+  D --> E{Dữ liệu hợp lệ?}
+  E -- Không --> E1[Hiện thông báo FormatException,<br/>giữ nguyên form] --> B
+  E -- Có --> F{Mã lớp đã có<br/>trong danh sách?}
+  F -- Có --> F1[Báo: Mã lớp đã tồn tại<br/>không ghi đè] --> B
+  F -- Không --> G[Transaction Firestore: đọc classes/mã]
+  G --> H{Document đã tồn tại?}
+  H -- Có --> H1[Báo lỗi trùng, không ghi đè] --> B
+  H -- Không --> I[Ghi classes/mã<br/>rules kiểm tra lại độ dài và trường]
+  I --> J{Ghi thành công?}
+  J -- Không --> J1[Báo lỗi lưu, giữ nguyên form] --> B
+  J -- Có --> K[Đóng form, báo Đã lưu lớp học,<br/>danh sách lớp tự cập nhật]
+  K --> L([Kết thúc])

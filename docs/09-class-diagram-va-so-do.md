@@ -38,5 +38,14 @@ Trường `gradeCount` chỉ có trong document Firestore của sinh viên, khô
 ### Xóa sinh viên (US08)
 ![Xóa sinh viên](diagrams/flow-delete-student.png)
 
+### Tạo lớp (US10)
+![Tạo lớp](diagrams/flow-create-class.png)
+
+### Thêm môn học (US14)
+![Thêm môn học](diagrams/flow-add-subject.png)
+
+### Lưu điểm (US15)
+![Lưu điểm](diagrams/flow-save-grade.png)
+
 Mỗi nhánh trong sơ đồ tương ứng với một ca test trong `test/` (model, store, màn hình)
 hoặc `tools/firestore-tests/rules.test.mjs`.

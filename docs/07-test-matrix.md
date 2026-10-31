@@ -47,6 +47,13 @@ Ca sai: mã trùng SV001; tuổi 0/121/21.5; email `khong-hop-le`; classId NOCLA
 - Không truy cập được trạng thái review/checks GitHub PR từ repo cục bộ. Merge trên main xác nhận code tích hợp nhưng không chứng minh Hiệp đã review; nhóm trưởng cần đối chiếu PR và reviewer/checks thật.
 - Test hiện có kiểm tra nền model/repository/rules/bootstrap, không bao phủ UI và phần lớn luồng nghiệp vụ. Mỗi chủ story cần thêm ca đúng/sai và UI test khi làm module; loading/rỗng/lỗi không thể xem là đạt chỉ từ test mapping.
 
+## Cập nhật 31/10/2026 (US09–US16)
+
+Phần Khôi + Hiệp đã bổ sung test giao diện và kiểm tra học kỳ sau khi ma trận này được lập: `test/classes_stories_test.dart`
+(US09–US12), `test/subjects_grades_stories_test.dart` (US13–US16), ca học kỳ trong `test/models_test.dart` và
+`tools/firestore-tests/rules.test.mjs`. Bảng đối chiếu story với test và kết quả (130 test Flutter qua, 12 test emulator qua)
+nằm ở mục 6 và 7 của [tài liệu module Lớp học, Môn học và Điểm](11-module-lop-mon-hoc-diem.md).
+
 ## Cập nhật 30/10/2026 (US01–US08)
 
 Phần Bắc + Phát đã bổ sung test và ảnh minh chứng sau khi ma trận này được lập. Bảng đối chiếu story với từng file test thực tế nằm ở mục 7 của [tài liệu module Tài khoản và Sinh viên](10-module-sinh-vien-va-tai-khoan.md); các cột "còn thiếu" ở trên cho US01–US08 là trạng thái ngày 27/10.

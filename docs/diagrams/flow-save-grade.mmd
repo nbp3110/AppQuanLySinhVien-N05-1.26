@@ -1,0 +1,19 @@
+flowchart TD
+  A([Bắt đầu: bấm Nhập / cập nhật điểm]) --> B[Chọn sinh viên, môn học,<br/>nhập học kỳ và điểm]
+  B --> C{Học kỳ dạng<br/>YYYY-1 hoặc YYYY-2?}
+  C -- Không --> C1[Báo: Học kỳ có dạng YYYY-1 hoặc YYYY-2] --> B
+  C -- Có --> D{Điểm là số<br/>từ 0 đến 10?}
+  D -- Không --> D1[Báo: Điểm phải là số từ 0 đến 10] --> B
+  D -- Có --> E[Tạo Grade: id = sinh viên~môn~học kỳ]
+  E --> F[Transaction Firestore: đọc sinh viên,<br/>môn học và bản ghi điểm cũ]
+  F --> G{Sinh viên và môn<br/>đều tồn tại?}
+  G -- Không --> G1[Báo: Sinh viên hoặc môn học không tồn tại] --> B
+  G -- Có --> H{Đã có điểm cùng<br/>sinh viên, môn, học kỳ?}
+  H -- Chưa có --> H1[Tăng gradeCount của sinh viên đúng 1<br/>trong cùng transaction]
+  H -- Đã có --> H2[Cập nhật điểm, không đổi gradeCount]
+  H1 --> I[Ghi grades/id<br/>rules kiểm tra học kỳ, điểm, tham chiếu, bộ đếm]
+  H2 --> I
+  I --> J{Ghi thành công?}
+  J -- Không --> J1[Báo: Không lưu được điểm, giữ nguyên form] --> B
+  J -- Có --> K[Đóng form, bảng điểm của sinh viên tự cập nhật]
+  K --> L([Kết thúc])
