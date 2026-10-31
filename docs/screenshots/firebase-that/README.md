@@ -25,5 +25,6 @@ trên project Firebase `qlsv-n05-phat-khoi` (thanh trên cùng của app ghi
 | `12-console-grades.png` | Collection `grades`: ID dạng `SV01~MH1~2026-1`, có `score: 8`, `semester`, `studentId`, `subjectId` |
 | `13-console-students-gradecount.png` | Collection `students`: SV01 có `gradeCount: 1` (bộ đếm điểm dùng để chặn xóa, US08), cùng `age`, `classId`, `email`, `major`, `name` |
 | `14-console-classes.png` | Collection `classes`: MS01–MS04, document MS01 có `cohort: "K18"`, `major`, `name` |
-
-Còn thiếu: ảnh tab Rules, ảnh Authentication → Users, ảnh sau khi lưu tên mới.
+| `15-console-rules.png` | Tab Rules của Firestore: rules đã publish (có hai phiên bản, bản mới nhất ngày 30/10), thấy hàm `manager()` kiểm tra vai trò |
+| `16-console-authentication.png` | Authentication → Users: 2 tài khoản email/mật khẩu (24100212 và 24100066), đã đăng nhập ngày 31/10 |
+| `17-doi-ten-da-luu.png` | Sau khi lưu: "Nguyen Ba Phat" hiện ở Hồ sơ của bạn và góc dưới trái (US04) |

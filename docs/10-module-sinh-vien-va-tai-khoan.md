@@ -97,6 +97,9 @@ Sơ đồ nằm ở [09-class-diagram-va-so-do.md](09-class-diagram-va-so-do.md)
 | Console: `grades` | ![grades](screenshots/firebase-that/12-console-grades.png) |
 | Console: `students` có `gradeCount` | ![students](screenshots/firebase-that/13-console-students-gradecount.png) |
 | Console: `classes` | ![classes](screenshots/firebase-that/14-console-classes.png) |
+| Console: Rules đã publish | ![Rules](screenshots/firebase-that/15-console-rules.png) |
+| Console: Authentication | ![Authentication](screenshots/firebase-that/16-console-authentication.png) |
+| Tên mới sau khi lưu | ![Tên đã lưu](screenshots/firebase-that/17-doi-ten-da-luu.png) |
 
 ## 7. Kiểm thử theo story
 
