@@ -2,8 +2,8 @@
 
 ## Project và phạm vi nền
 
-Tận dụng project có sẵn `quan-ly-sinh-vien-ba83b`, cấu hình Android trong
-`lib/firebase_options.dart` và `android/app/google-services.json`.
+Dùng project Firebase riêng của nhóm `qlsv-n05-phat-khoi`, cấu hình Android và web trong
+`lib/firebase_options.dart` (Android còn có `android/app/google-services.json`).
 Không lưu mật khẩu, refresh token, service-account JSON trong Firestore/Git.
 Firebase Auth quản lý thông tin xác thực. Các manager dùng chung dữ liệu nghiệp vụ.
 
@@ -95,7 +95,7 @@ Không mở rules `allow read, write: if true` để chạy thử.
 
 ```powershell
 flutter pub get
-npx --yes --package firebase-tools firebase deploy --only firestore:rules,firestore:indexes --project quan-ly-sinh-vien-ba83b
+npx --yes --package firebase-tools firebase deploy --only firestore:rules,firestore:indexes --project qlsv-n05-phat-khoi
 ```
 
 Chỉ Android đã có cấu hình Firebase. Web/Windows/iOS cần đăng ký ứng dụng riêng

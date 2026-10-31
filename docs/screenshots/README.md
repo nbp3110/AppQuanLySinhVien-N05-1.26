@@ -13,5 +13,7 @@ trên Android với Firebase thật.
 | `us08-chan-xoa.png` | US08 | Sinh viên đã có 2 bản ghi điểm bị chặn xóa, kèm thông báo lý do |
 | `us03-us04-ca-nhan.png` | US02, US03, US04 | Hồ sơ cá nhân: tên, email, nút Chỉnh sửa tên và Đăng xuất |
 
+Ảnh chạy với Firebase thật nằm ở [firebase-that/README.md](firebase-that/README.md).
+
 Lưu ý khi dùng trong báo cáo: dữ liệu demo giữ lại trong trình duyệt nên số hồ sơ có thể khác nhau
 giữa các ảnh (ví dụ 7 hoặc 8 hồ sơ vì đã xóa SV008 ở một lần chạy trước).

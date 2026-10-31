@@ -64,9 +64,9 @@ Giao diện: hỏi xác nhận trước khi xóa; sinh viên đã có điểm b�
 
 Sơ đồ nằm ở [09-class-diagram-va-so-do.md](09-class-diagram-va-so-do.md): Class Diagram, đăng nhập, thêm, sửa, xóa sinh viên.
 
-## 6. Ảnh minh chứng (bản trình diễn)
+## 6. Ảnh minh chứng
 
-Chụp từ bản web, dữ liệu mẫu lưu trên trình duyệt, không ghi Firebase. Bảng mô tả ở
+**Bản trình diễn** (dữ liệu mẫu lưu trên trình duyệt, không ghi Firebase). Bảng mô tả ở
 [screenshots/README.md](screenshots/README.md).
 
 | Story | Ảnh |
@@ -77,6 +77,21 @@ Chụp từ bản web, dữ liệu mẫu lưu trên trình duyệt, không ghi F
 | US08 | ![Hộp xác nhận xóa](screenshots/us08-xac-nhan-xoa.png) |
 | US08 | ![Chặn xóa sinh viên có điểm](screenshots/us08-chan-xoa.png) |
 | US02–US04 | ![Hồ sơ cá nhân](screenshots/us03-us04-ca-nhan.png) |
+
+**Firebase thật** (31/10/2026, bản web, project `qlsv-n05-phat-khoi`). Bảng mô tả ở
+[screenshots/firebase-that/README.md](screenshots/firebase-that/README.md).
+
+| Bước | Ảnh |
+|---|---|
+| Đăng nhập sai | ![Đăng nhập lỗi](screenshots/firebase-that/01-dang-nhap-loi.png) |
+| Đăng nhập thành công | ![Đăng nhập thành công](screenshots/firebase-that/02-dang-nhap-thanh-cong.png) |
+| Lớp học | ![Lớp học](screenshots/firebase-that/03-lop-hoc.png) |
+| Sinh viên gắn lớp | ![Sinh viên](screenshots/firebase-that/04-sinh-vien-gan-lop.png) |
+| Môn học | ![Môn học](screenshots/firebase-that/05-mon-hoc.png) |
+| Nhập điểm | ![Nhập điểm](screenshots/firebase-that/06-nhap-diem.png) |
+| Chặn xóa sinh viên có điểm | ![Chặn xóa](screenshots/firebase-that/07-chan-xoa-sv-co-diem.png) |
+| Xóa sinh viên chưa có điểm | ![Xóa được](screenshots/firebase-that/08-xoa-sv-chua-co-diem.png) |
+| Đổi tên hiển thị | ![Đổi tên](screenshots/firebase-that/09-doi-ten-hien-thi.png) |
 
 ## 7. Kiểm thử theo story
 
@@ -99,13 +114,17 @@ Ngày 30/10/2026, máy Windows, Flutter 3.47.8:
 - `flutter test`: 74 test qua, đã gồm các test của G4-01/G4-02 ở mục 7.
 - Firestore Emulator (project giả `demo-qlsv`, Java 21.0.13, Node 24.21.0): 11 test qua, 0 lỗi.
 
-Sau mốc trên, model `Student` được bỏ giá trị mặc định và các test chuyển sang `sampleStudent()`;
-cần chạy lại `flutter analyze` và `flutter test` để ghi nhận kết quả sau thay đổi này.
+Sau đó model `Student` được bỏ giá trị mặc định và các test chuyển sang `sampleStudent()`. Chạy lại
+ngày 31/10/2026: `flutter analyze` không có vấn đề, `flutter test` 74 test qua.
+
+Ngày 31/10/2026, bản web (Chrome) với Firebase thật, project `qlsv-n05-phat-khoi`: đăng nhập sai bị từ chối,
+đăng nhập đúng vào được, tạo lớp, môn học, sinh viên, nhập điểm, sinh viên có điểm bị chặn xóa, sinh viên chưa
+có điểm xóa được, đổi tên hiển thị (ảnh ở mục 6).
 
 ## 9. Hạn chế đã biết
 
-- Ứng dụng vẫn trỏ vào project Firebase `quan-ly-sinh-vien-ba83b`; chưa tách project riêng cho nhóm mới.
+- Ứng dụng dùng project Firebase riêng của nhóm `qlsv-n05-phat-khoi` (Spark, Firestore `asia-southeast1`).
 - Hồ sơ sinh viên tạo trước thay đổi bộ đếm chưa có `gradeCount`, nên chưa sửa, xóa hoặc nhập điểm được cho đến khi bổ sung trường này.
-- Chưa nghiệm thu giao diện trên Android với Firebase thật; ảnh minh chứng lấy từ bản trình diễn.
+- Nghiệm thu với Firebase thật mới chạy trên bản web (Chrome); chưa chạy trên Android vì không có thiết bị.
 - Xóa lớp, môn và điểm vẫn bị rules khóa (ngoài phạm vi các story hiện tại).
 - Validator học kỳ (chỉ nhận dạng `2026-1`, `2026-2`) thuộc US15, chưa xử lý ở đây.
