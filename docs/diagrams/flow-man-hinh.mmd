@@ -1,0 +1,32 @@
+flowchart TD
+  A[Mở ứng dụng] --> B{Đã đăng nhập?}
+  B -- Chưa --> L[Màn hình Đăng nhập]
+  L -- Nhập email + mật khẩu --> V{Hợp lệ và có quyền manager?}
+  V -- Sai --> E[Báo lỗi kèm mã chi tiết, ở lại màn hình]
+  E --> L
+  V -- Đúng --> H[Tổng quan]
+  L -- Khám phá bản trình diễn --> H
+  L -- Mẫu giao diện --> C5[Màn hình mẫu Câu 5]
+  B -- Rồi --> H
+  H --> SV[Danh sách sinh viên]
+  H --> LH[Lớp học]
+  H --> MD[Môn và điểm]
+  H --> CN[Cá nhân]
+  H -- Góc học tập --> C5
+  SV -- Thêm sinh viên / Sửa --> F[Form sinh viên]
+  F -- Lưu, dữ liệu sai --> F
+  F -- Lưu, hợp lệ --> SV
+  SV -- Xóa sinh viên --> X{gradeCount = 0?}
+  X -- Có điểm --> XB[Báo không thể xóa]
+  X -- Chưa có điểm --> XC[Hộp xác nhận xóa]
+  XC -- Xác nhận --> SV
+  LH -- Thêm / Sửa lớp --> LF[Form lớp học]
+  LF -- Lưu hợp lệ --> LH
+  LH -- Xem lớp --> SV
+  MD -- Môn học: Thêm môn --> MF[Form môn học]
+  MF -- Lưu hợp lệ --> MD
+  MD -- Bảng điểm: Nhập điểm --> GF[Hộp nhập điểm]
+  GF -- Lưu hợp lệ --> MD
+  CN -- Chỉnh sửa tên --> CNF[Hộp sửa tên]
+  CNF -- Lưu --> CN
+  CN -- Đăng xuất --> L

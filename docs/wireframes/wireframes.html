@@ -1,0 +1,90 @@
+<!doctype html><meta charset="utf-8"><style>
+body{margin:0;background:#fff;font-family:Roboto,Arial,sans-serif;color:#222}
+.phone{width:360px;height:640px;border:3px solid #333;border-radius:22px;background:#fafafa;position:relative;overflow:hidden;margin:20px;display:inline-block;box-sizing:border-box}
+.bar{height:44px;background:#d9d9d9;border-bottom:2px solid #333;display:flex;align-items:center;padding:0 14px;font-weight:700;font-size:15px;gap:8px}
+.bar .sp{flex:1}
+.box{border:2px solid #333;background:#e6e6e6;border-radius:6px;padding:8px;margin:10px 14px;font-size:13px}
+.box.w{background:#fff}.box.h{height:64px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.btn{border:2px solid #333;background:#bbb;border-radius:20px;padding:9px;text-align:center;font-weight:700;font-size:13px;margin:10px 14px}
+.btn.s{display:inline-block;margin:4px 3px;padding:6px 12px;font-size:12px}
+.nav{position:absolute;bottom:0;left:0;right:0;height:52px;background:#d9d9d9;border-top:2px solid #333;display:flex;justify-content:space-around;align-items:center;font-size:10px}
+.nav b{background:#999;border-radius:10px;padding:3px 7px}
+.row{display:flex;align-items:center;gap:10px;border-bottom:1px solid #999;padding:7px 14px;font-size:12px}
+.av{width:30px;height:30px;border:2px solid #333;border-radius:50%;background:#ccc;flex:none}
+.in{border:2px solid #333;background:#fff;border-radius:4px;padding:8px;margin:8px 14px;font-size:12px;color:#555}
+.cap{position:absolute;top:2px;right:8px;font-size:9px;color:#777}
+.x{position:relative;height:64px;border:2px solid #333;background:#ddd;margin:10px 14px}
+.dlg{position:absolute;left:24px;right:24px;top:170px;border:3px solid #333;background:#fff;border-radius:10px;padding:10px}
+.note{font-size:11px;color:#444;margin:4px 14px}
+.grid{display:flex;gap:8px;margin:10px 14px}.grid .box{flex:1;margin:0;text-align:center;font-weight:700;padding:14px 4px}
+</style><body>
+<!-- 01 -->
+<div class="phone" id="s01"><div class="bar">EduSpace</div>
+<div class="x" style="height:120px;margin-top:20px"><div style="text-align:center;padding-top:44px">Logo / hình minh họa</div></div>
+<div class="note" style="font-size:14px;font-weight:700;margin-top:14px">Một ngày học tập thật hiệu quả!</div>
+<div class="in">Email quản lý</div><div class="in">Mật khẩu</div>
+<div class="btn">Đăng nhập</div><div class="btn" style="background:#eee">Khám phá bản trình diễn</div>
+<div class="note">⚠ Vùng báo lỗi: "Sai thông tin đăng nhập…"</div>
+<div class="note" style="text-align:center;margin-top:16px;text-decoration:underline">Mẫu giao diện · Câu 5</div></div>
+<!-- 02 -->
+<div class="phone" id="s02"><div class="bar">Tổng quan <span class="sp"></span>🔔</div>
+<div class="box h w">Banner: Xin chào, Quản lý</div>
+<div class="grid"><div class="box">Sinh viên<br>00</div><div class="box">Lớp học<br>00</div><div class="box">Môn học<br>00</div></div>
+<div class="box w"><b>Sinh viên mới</b><div class="row" style="padding:6px 0"><div class="av"></div>Họ tên · Mã · Lớp</div><div class="row" style="padding:6px 0"><div class="av"></div>Họ tên · Mã · Lớp</div><div style="text-align:right">Xem tất cả →</div></div>
+<div class="box w"><b>Góc học tập</b><br>Xem giao diện mẫu Câu 5 →</div>
+<div class="nav"><b>Tổng quan</b><span>Sinh viên</span><span>Lớp</span><span>Môn&điểm</span><span>Cá nhân</span></div></div>
+<!-- 03 -->
+<div class="phone" id="s03"><div class="bar">Sinh viên <span class="sp"></span>🔔</div>
+<div class="btn" style="background:#aaa">＋ Thêm sinh viên</div>
+<div class="in">🔍 Tìm tên, mã sinh viên hoặc ngành…</div>
+<div style="margin:0 11px"><span class="btn s" style="background:#999">✓ Tất cả lớp</span><span class="btn s">CNTT01</span><span class="btn s">CNTT02</span><span class="btn s">KT01</span></div>
+<div class="row"><div class="av"></div><div style="flex:1"><b>Sinh viên Mẫu 01</b><br>SV001 · CNTT01</div>⋮</div>
+<div class="row"><div class="av"></div><div style="flex:1"><b>Sinh viên Mẫu 02</b><br>SV002 · CNTT01</div>⋮</div>
+<div class="row"><div class="av"></div><div style="flex:1"><b>Sinh viên Mẫu 03</b><br>SV003 · CNTT01</div>⋮</div>
+<div class="note" style="border:1px dashed #777;padding:6px;margin-top:10px">Menu ⋮ : Xem hồ sơ · Sửa thông tin · Xóa sinh viên<br>Trạng thái rỗng: "Không có sinh viên phù hợp"</div>
+<div class="nav"><span>Tổng quan</span><b>Sinh viên</b><span>Lớp</span><span>Môn&điểm</span><span>Cá nhân</span></div></div>
+<!-- 04 -->
+<div class="phone" id="s04"><div class="bar">← Thêm / Sửa sinh viên</div>
+<div class="in">Mã sinh viên *</div><div class="in">Họ và tên *</div><div class="in">Ngành *</div><div class="in">Tuổi *</div><div class="in">Lớp ▾</div><div class="in">Email / Điện thoại</div>
+<div class="note" style="color:#900">⚠ Lỗi từng trường: "Tuổi phải là số nguyên từ 1 đến 120."</div>
+<div style="display:flex"><div class="btn" style="flex:1;background:#eee">Hủy</div><div class="btn" style="flex:1">Lưu thông tin</div></div></div>
+<!-- 05 -->
+<div class="phone" id="s05"><div class="bar">Sinh viên <span class="sp"></span>🔔</div>
+<div class="row"><div class="av"></div><div style="flex:1"><b>Sinh viên Mẫu 01</b><br>SV001 · CNTT01</div>⋮</div>
+<div class="row"><div class="av"></div><div style="flex:1"><b>Sinh viên Mẫu 02</b><br>SV002 · CNTT01</div>⋮</div>
+<div style="position:absolute;inset:44px 0 0 0;background:rgba(0,0,0,.35)"></div>
+<div class="dlg"><b>Xóa sinh viên?</b><p style="font-size:12px">Hồ sơ sẽ bị xóa khỏi hệ thống. Chỉ xóa được khi chưa có điểm (gradeCount = 0).</p><div style="text-align:right"><span class="btn s" style="background:#eee">Giữ lại</span><span class="btn s">Xác nhận xóa</span></div></div>
+<div class="note" style="position:absolute;bottom:10px;left:0;right:0;border:1px dashed #777;padding:6px">Nếu có điểm: thông báo "Sinh viên đã có điểm, không thể xóa."</div></div>
+<!-- 06 -->
+<div class="phone" id="s06"><div class="bar">Lớp học <span class="sp"></span>🔔</div>
+<div class="btn" style="background:#aaa">＋ Thêm lớp học</div>
+<div class="box w"><b>CNTT01</b> · Công nghệ thông tin<br>Khóa K24 · 4 sinh viên<div style="text-align:right">✎ Sửa &nbsp; Xem lớp →</div></div>
+<div class="box w"><b>CNTT02</b> · Công nghệ thông tin<br>Khóa K24 · 2 sinh viên<div style="text-align:right">✎ Sửa &nbsp; Xem lớp →</div></div>
+<div class="box w"><b>KT01</b> · Kế toán<br>Khóa K24 · 1 sinh viên<div style="text-align:right">✎ Sửa &nbsp; Xem lớp →</div></div>
+<div class="note" style="border:1px dashed #777;padding:6px">Form thêm/sửa lớp: Mã lớp (khóa khi sửa), Tên lớp, Ngành, Khóa</div>
+<div class="nav"><span>Tổng quan</span><span>Sinh viên</span><b>Lớp</b><span>Môn&điểm</span><span>Cá nhân</span></div></div>
+<!-- 07 -->
+<div class="phone" id="s07"><div class="bar">Môn & điểm <span class="sp"></span>🔔</div>
+<div style="margin:10px 14px"><span class="btn s" style="margin-left:0">Môn học</span><span class="btn s" style="background:#999">✓ Bảng điểm</span></div>
+<div class="note"><b>Sinh viên đang xem</b></div><div class="in">Nguyễn Văn A · SV01 ▾</div>
+<div class="btn">＋ Nhập điểm</div>
+<div class="box w"><div style="display:flex">Cơ Sở Dữ Liệu · MH1<span class="sp" style="flex:1"></span><b>8.0</b></div><small>Học kỳ 2026-1</small></div>
+<div class="box w"><div style="display:flex">Lập trình di động · MH2<span style="flex:1"></span><b>9.0</b></div><small>Học kỳ 2026-1</small></div>
+<div class="dlg" style="top:318px;padding:8px"><b>Nhập điểm sinh viên</b><div class="in" style="margin:4px 0">Sinh viên ▾</div><div class="in" style="margin:4px 0">Môn học ▾</div><div class="in" style="margin:4px 0">Học kỳ (2026-1)</div><div class="in" style="margin:4px 0">Điểm (0–10)</div><div style="text-align:right"><span class="btn s" style="background:#eee">Hủy</span><span class="btn s">Lưu điểm</span></div></div>
+<div class="nav"><span>Tổng quan</span><span>Sinh viên</span><span>Lớp</span><b>Môn&điểm</b><span>Cá nhân</span></div></div>
+<!-- 08 -->
+<div class="phone" id="s08"><div class="bar">Cá nhân</div>
+<div class="box w" style="text-align:center"><div class="av" style="margin:6px auto;width:54px;height:54px"></div><b>Tên hiển thị</b><br>email · Người quản lý</div>
+<div class="note"><b>Hồ sơ của bạn</b> — Thông tin tài khoản và không gian làm việc</div>
+<div class="btn">✎ Chỉnh sửa tên</div><div class="btn" style="background:#eee">⎋ Đăng xuất</div>
+<div class="note" style="border:1px dashed #777;padding:6px">Hộp thoại sửa tên: ô "Tên hiển thị" (bắt buộc) · Hủy · Lưu</div>
+<div class="nav"><span>Tổng quan</span><span>Sinh viên</span><span>Lớp</span><span>Môn&điểm</span><b>Cá nhân</b></div></div>
+<!-- 09 -->
+<div class="phone" id="s09" style="background:#f2f5fd"><div class="bar" style="background:#e6e6e6">🦉 Lớp 12 ⌄ <span class="sp"></span>⭐0 🔔</div>
+<div class="grid"><div class="box" style="background:#9e9;height:70px">Gia sư<br>Dicabee</div><div class="box" style="background:#fd8;height:70px">Chụp ảnh<br>Bài tập</div><div class="box" style="background:#8de;height:70px">Nhập<br>Câu hỏi</div></div>
+<div class="grid" style="font-size:10px"><div class="box" style="padding:6px 0">Từ điển</div><div class="box" style="padding:6px 0">Cân bằng PTHH</div><div class="box" style="padding:6px 0">Máy tính</div><div class="box" style="padding:6px 0">Đếm ngược</div><div class="box" style="padding:6px 0">Bảng THHH</div></div>
+<div class="x" style="height:130px"><div style="text-align:center;padding-top:50px;font-weight:700">Banner HỘP QUÀ MAY MẮN</div></div>
+<div class="note"><b>Góc giải trí</b></div>
+<div class="grid" style="font-size:10px"><div class="box" style="padding:12px 0">Thông Điệp</div><div class="box" style="padding:12px 0">Ca Rô đại</div><div class="box" style="padding:12px 0">Đuổi hình</div><div class="box" style="padding:12px 0">Giải cứu</div></div>
+<div class="nav" style="font-size:9px"><b>Trang chủ</b><span>Luyện đề</span><span>Khóa học</span><span>Hỏi đáp</span><span>Học Tập</span><span>Cá nhân</span></div></div>
+</body>
