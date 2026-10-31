@@ -16,5 +16,15 @@ trên project Firebase `qlsv-n05-phat-khoi` (thanh trên cùng của app ghi
 | `08-xoa-sv-chua-co-diem.png` | US08 | Xóa sinh viên chưa có điểm thành công: "Đã xóa sinh viên." |
 | `09-doi-ten-hien-thi.png` | US04 | Hộp thoại Cập nhật họ tên (chỉ sửa tên hiển thị; email và quyền không đổi) |
 
-Ảnh còn thiếu: Firestore Console (collection `users`, `students` có `gradeCount`, `grades`) và ảnh sau khi
-lưu tên mới. Xem hướng dẫn trong tài liệu `../../10-module-sinh-vien-va-tai-khoan.md`, mục 6.
+Ảnh Firebase Console (project `qlsv-n05-phat-khoi`, Firestore Database, tab Data):
+
+| Ảnh | Nội dung |
+|---|---|
+| `10-console-users.png` | Collection `users`: 2 document có ID là UID của tài khoản; hồ sơ có `displayName`, `email`, `role: "manager"` |
+| `11-console-subjects.png` | Collection `subjects`: MH1–MH4, document MH1 có `name` và `credits: 3` |
+| `12-console-grades.png` | Collection `grades`: ID dạng `SV01~MH1~2026-1`, có `score: 8`, `semester`, `studentId`, `subjectId` |
+| `13-console-students-gradecount.png` | Collection `students`: SV01 có `gradeCount: 1` (bộ đếm điểm dùng để chặn xóa, US08), cùng `age`, `classId`, `email`, `major`, `name` |
+| `14-console-classes.png` | Collection `classes`: MS01–MS04, document MS01 có `cohort: "K18"`, `major`, `name` |
+| `15-console-rules.png` | Tab Rules của Firestore: rules đã publish (có hai phiên bản, bản mới nhất ngày 30/10), thấy hàm `manager()` kiểm tra vai trò |
+| `16-console-authentication.png` | Authentication → Users: 2 tài khoản email/mật khẩu (24100212 và 24100066), đã đăng nhập ngày 31/10 |
+| `17-doi-ten-da-luu.png` | Sau khi lưu: "Nguyen Ba Phat" hiện ở Hồ sơ của bạn và góc dưới trái (US04) |

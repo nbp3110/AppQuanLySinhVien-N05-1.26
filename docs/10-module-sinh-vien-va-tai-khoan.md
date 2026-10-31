@@ -92,6 +92,14 @@ Sơ đồ nằm ở [09-class-diagram-va-so-do.md](09-class-diagram-va-so-do.md)
 | Chặn xóa sinh viên có điểm | ![Chặn xóa](screenshots/firebase-that/07-chan-xoa-sv-co-diem.png) |
 | Xóa sinh viên chưa có điểm | ![Xóa được](screenshots/firebase-that/08-xoa-sv-chua-co-diem.png) |
 | Đổi tên hiển thị | ![Đổi tên](screenshots/firebase-that/09-doi-ten-hien-thi.png) |
+| Console: hồ sơ `users` | ![users](screenshots/firebase-that/10-console-users.png) |
+| Console: `subjects` | ![subjects](screenshots/firebase-that/11-console-subjects.png) |
+| Console: `grades` | ![grades](screenshots/firebase-that/12-console-grades.png) |
+| Console: `students` có `gradeCount` | ![students](screenshots/firebase-that/13-console-students-gradecount.png) |
+| Console: `classes` | ![classes](screenshots/firebase-that/14-console-classes.png) |
+| Console: Rules đã publish | ![Rules](screenshots/firebase-that/15-console-rules.png) |
+| Console: Authentication | ![Authentication](screenshots/firebase-that/16-console-authentication.png) |
+| Tên mới sau khi lưu | ![Tên đã lưu](screenshots/firebase-that/17-doi-ten-da-luu.png) |
 
 ## 7. Kiểm thử theo story
 
