@@ -1,5 +1,8 @@
 import 'model_validation.dart';
 
+/// Điểm một sinh viên ở một môn trong một học kỳ (collection `grades`).
+/// ID document = `studentId~subjectId~semester` nên nhập lại chỉ cập nhật một bản ghi.
+/// Học kỳ phải dạng YYYY-1 hoặc YYYY-2, điểm từ 0 đến 10.
 class Grade {
   final String studentId;
   final String subjectId;

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/subject.dart';
 import '../ui/project_theme.dart';
 
+/// Danh sách môn học (US13, US14): tìm kiếm, thêm môn, kiểm tra mã trùng và tín chỉ hợp lệ.
 class SubjectsScreen extends StatefulWidget {
   const SubjectsScreen({
     super.key,

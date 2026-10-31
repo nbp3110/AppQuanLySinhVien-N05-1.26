@@ -9,6 +9,7 @@ void main() {
   runApp(const FirebaseAppLoader(child: MyApp()));
 }
 
+/// Gốc ứng dụng EduSpace: chủ đề giao diện và màn hình đăng nhập.
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override

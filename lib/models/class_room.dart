@@ -1,5 +1,6 @@
 import 'model_validation.dart';
 
+/// Lớp học (collection `classes`): mã lớp, tên, ngành, khóa. Mã lớp là ID document và không đổi khi sửa.
 class ClassRoom {
   final String id;
   final String name;

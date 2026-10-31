@@ -1,5 +1,6 @@
 import 'model_validation.dart';
 
+/// Môn học (collection `subjects`): mã môn, tên, số tín chỉ nguyên từ 1 đến 10.
 class Subject {
   final String id;
   final String name;

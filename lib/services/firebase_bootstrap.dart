@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../firebase_options.dart';
 
+/// Khởi tạo Firebase một lần khi mở ứng dụng và báo lỗi nếu không kết nối được.
 class FirebaseBootstrap {
   static Future<void>? _initialization;
 

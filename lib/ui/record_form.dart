@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'project_theme.dart';
 
+/// Mô tả một ô nhập của form: nhãn, giá trị đầu và hàm kiểm tra.
 class FieldSpec {
   const FieldSpec(
     this.key,
@@ -17,6 +18,7 @@ class FieldSpec {
   final bool number, locked, optional;
 }
 
+/// Mở hộp thoại form dùng chung; chỉ lưu khi mọi ô hợp lệ, lỗi giữ nguyên dữ liệu đã nhập.
 Future<void> recordForm(
   BuildContext context, {
   required String title,

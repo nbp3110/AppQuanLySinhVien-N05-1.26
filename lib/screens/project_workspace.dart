@@ -9,6 +9,7 @@ import 'grades_screen.dart';
 import 'learning_sample_screen.dart';
 import 'subjects_screen.dart';
 
+/// Không gian quản lý sau đăng nhập: Tổng quan, Sinh viên, Lớp học, Môn & điểm, Cá nhân.
 class ProjectWorkspace extends StatefulWidget {
   const ProjectWorkspace({super.key, required this.store});
   final ProjectStore store;

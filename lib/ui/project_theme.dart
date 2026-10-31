@@ -73,6 +73,7 @@ ThemeData projectTheme() => ThemeData(
   dividerColor: const Color(0xFFEBF0F3),
 );
 
+/// Khung nội dung bo góc dùng chung cho các màn hình.
 class Panel extends StatelessWidget {
   const Panel({
     super.key,
@@ -95,6 +96,7 @@ class Panel extends StatelessWidget {
   );
 }
 
+/// Nhãn nhỏ bo tròn (học kỳ, trạng thái).
 class Pill extends StatelessWidget {
   const Pill(this.text, {super.key, this.color = green});
   final String text;
@@ -113,6 +115,7 @@ class Pill extends StatelessWidget {
   );
 }
 
+/// Trạng thái rỗng: biểu tượng và lời nhắn khi chưa có dữ liệu.
 class EmptyState extends StatelessWidget {
   const EmptyState({
     super.key,

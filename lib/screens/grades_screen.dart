@@ -5,6 +5,7 @@ import '../models/student.dart';
 import '../models/subject.dart';
 import '../ui/project_theme.dart';
 
+/// Bảng điểm (US15, US16): chọn sinh viên, xem điểm theo môn và học kỳ, nhập hoặc cập nhật điểm.
 class GradesScreen extends StatefulWidget {
   const GradesScreen({
     super.key,
