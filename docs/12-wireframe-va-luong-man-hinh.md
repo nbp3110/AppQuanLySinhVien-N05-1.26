@@ -4,7 +4,7 @@ Có 9 wireframe (vẽ bằng HTML, nguồn `docs/wireframes/wireframes.html`, �
 
 | # | Màn hình | Wireframe | Luồng công việc (Flow of work) |
 |---|---|---|---|
-| 1 | Đăng nhập | wireframes/01-dang-nhap.png | Nhập email + mật khẩu → kiểm tra → vào Tổng quan; sai thì báo lỗi kèm mã chi tiết. Có lối "Khám phá bản trình diễn" và "Mẫu giao diện Câu 5". |
+| 1 | Đăng nhập | wireframes/01-dang-nhap.png | Nhập email + mật khẩu → kiểm tra → vào Tổng quan; sai thì báo lỗi kèm mã chi tiết. Có lối "Khám phá bản trình diễn" và "Xem màn hình mẫu". |
 | 2 | Tổng quan | wireframes/02-tong-quan.png | Số liệu sinh viên, lớp, môn; "Xem tất cả" sang danh sách sinh viên; "Góc học tập" sang Câu 5. |
 | 3 | Danh sách sinh viên | wireframes/03-danh-sach-sinh-vien.png | Tìm kiếm + lọc lớp; menu ⋮: xem, sửa, xóa; nút Thêm sinh viên. |
 | 4 | Form thêm/sửa sinh viên | wireframes/04-form-sinh-vien.png | Nhập → kiểm tra từng trường → dữ liệu sai thì giữ nguyên form và báo lỗi → hợp lệ thì lưu và quay lại danh sách. |

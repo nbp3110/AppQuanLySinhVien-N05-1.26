@@ -309,7 +309,7 @@ class _ProjectLoginScreenState extends State<ProjectLoginScreen> {
                                         const LearningSampleScreen(),
                                   ),
                                 ),
-                                child: const Text('Mẫu giao diện · Câu 5'),
+                                child: const Text('Xem màn hình mẫu'),
                               ),
                             ],
                           ),
