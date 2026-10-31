@@ -16,5 +16,13 @@ trên project Firebase `qlsv-n05-phat-khoi` (thanh trên cùng của app ghi
 | `08-xoa-sv-chua-co-diem.png` | US08 | Xóa sinh viên chưa có điểm thành công: "Đã xóa sinh viên." |
 | `09-doi-ten-hien-thi.png` | US04 | Hộp thoại Cập nhật họ tên (chỉ sửa tên hiển thị; email và quyền không đổi) |
 
-Ảnh còn thiếu: Firestore Console (collection `users`, `students` có `gradeCount`, `grades`) và ảnh sau khi
-lưu tên mới. Xem hướng dẫn trong tài liệu `../../10-module-sinh-vien-va-tai-khoan.md`, mục 6.
+Ảnh Firebase Console (project `qlsv-n05-phat-khoi`, Firestore Database, tab Data):
+
+| Ảnh | Nội dung |
+|---|---|
+| `10-console-users.png` | Collection `users`: 2 document có ID là UID của tài khoản; hồ sơ có `displayName`, `email`, `role: "manager"` |
+| `11-console-subjects.png` | Collection `subjects`: MH1–MH4, document MH1 có `name` và `credits: 3` |
+| `12-console-grades.png` | Collection `grades`: ID dạng `SV01~MH1~2026-1`, có `score: 8`, `semester`, `studentId`, `subjectId` |
+| `13-console-students-gradecount.png` | Collection `students`: SV01 có `gradeCount: 1` (bộ đếm điểm dùng để chặn xóa, US08), cùng `age`, `classId`, `email`, `major`, `name`. Ảnh có cửa sổ Snipping Tool che một phần, nên chụp lại nếu dùng trong báo cáo |
+
+Còn thiếu: ảnh tab Rules, ảnh Authentication → Users, ảnh sau khi lưu tên mới.
