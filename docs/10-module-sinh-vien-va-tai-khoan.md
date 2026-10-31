@@ -105,7 +105,7 @@ Sơ đồ nằm ở [09-class-diagram-va-so-do.md](09-class-diagram-va-so-do.md)
 
 | Story | Test tự động |
 |---|---|
-| US01 | `test/auth_service_test.dart` (đăng nhập đúng, thiếu hồ sơ, sai vai trò, sai mật khẩu); `test/login_screen_test.dart` (trường trống, sai mật khẩu, lỗi mạng, tài khoản không có quyền, vào được màn hình quản lý); rules: khách và tài khoản chưa cấp quyền bị chặn |
+| US01 | `test/auth_service_test.dart` (đăng nhập đúng, thiếu hồ sơ, sai vai trò, sai mật khẩu); `test/login_screen_test.dart` (trường trống, sai mật khẩu, lỗi mạng, tài khoản không có quyền, lỗi Firestore sau đăng nhập hiện mã lỗi, vào được màn hình quản lý); rules: khách và tài khoản chưa cấp quyền bị chặn |
 | US02 | `test/auth_service_test.dart`; `test/login_screen_test.dart` (đăng xuất về đăng nhập); `test/project_store_test.dart` (đăng xuất hủy stream và xóa dữ liệu; đăng xuất lỗi giữ nguyên phiên) |
 | US03 | `test/cloud_flow_test.dart` (hồ sơ được tải sau đăng nhập); chưa có widget test riêng cho màn hình hồ sơ, chỉ có ảnh minh chứng |
 | US04 | `test/auth_service_test.dart` (cắt khoảng trắng, từ chối tên trống hoặc quá 150 ký tự, không tạo lại hồ sơ thiếu); `test/cloud_flow_test.dart`; rules: chỉ sửa được `displayName` của chính mình |
@@ -123,7 +123,7 @@ Ngày 30/10/2026, máy Windows, Flutter 3.47.8:
 - Firestore Emulator (project giả `demo-qlsv`, Java 21.0.13, Node 24.21.0): 11 test qua, 0 lỗi.
 
 Sau đó model `Student` được bỏ giá trị mặc định và các test chuyển sang `sampleStudent()`. Chạy lại
-ngày 31/10/2026: `flutter analyze` không có vấn đề, `flutter test` 74 test qua.
+ngày 31/10/2026 (sau khi thêm cấu hình web và hiển thị mã lỗi đăng nhập): `flutter analyze` không có vấn đề, `flutter test` 75 test qua.
 
 Ngày 31/10/2026, bản web (Chrome) với Firebase thật, project `qlsv-n05-phat-khoi`: đăng nhập sai bị từ chối,
 đăng nhập đúng vào được, tạo lớp, môn học, sinh viên, nhập điểm, sinh viên có điểm bị chặn xóa, sinh viên chưa
